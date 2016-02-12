@@ -1,0 +1,64 @@
+<zk>
+	<window id="importForm" height="300px" width="400px"
+		apply="org.zkoss.bind.BindComposer"
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal"
+		viewModel="@id('vm') @init('com.hrr3.modelview.LRRImportFileMV')">
+		
+		
+		<vbox vflex="1" hflex="1">
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Source File</label>
+					</div>
+				</caption>
+				<hbox hflex="1" style="padding: 10px;">
+					<textbox id="LRRFileName" value="@bind(vm.fileName)" disabled="true" width="200px"/>
+				
+				<button label="Browse..." upload="true"
+					onUpload="@command('onUploadFile',upEvent=event)">
+				</button>
+				</hbox>
+			</groupbox>
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Date Range</label>
+					</div>
+				</caption>
+				<hbox hflex="1" style="padding: 10px;">
+						From:
+					<datebox id="lrrImportFrom" width="90px" disabled="@load(!vm.fileuploaded)"
+						constraint="no empty" format="MM/dd/yyyy" />
+		
+					To:
+					<datebox id="lrrImportTo" width="90px" constraint="no empty" disabled="@load(!vm.fileuploaded)"
+						format="MM/dd/yyyy" />
+				</hbox>
+			</groupbox>
+
+			
+			<hbox style="padding: 2px;" hflex="1" pack="end">
+				
+				<button label="Import Data" disabled="@load(!vm.fileuploaded)" autodisable="self" height="40px" width="80px"
+					onClick="@command('importData')">
+				</button>		
+				
+				<button id="exitLRRImportBtn" height="40px" onClick="@command('closePopup')"
+					autodisable="self" label="Exit" width="80px" />
+			</hbox>
+
+		</vbox>
+		
+		
+		
+
+	</window>
+
+
+
+
+</zk>

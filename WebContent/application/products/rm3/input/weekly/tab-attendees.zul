@@ -1,0 +1,26 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox hflex="1" vflex="1">
+		<groupbox hflex="1" vflex="1">
+			<caption>
+				<div>
+					<label>Attendees:</label>
+				</div>
+			</caption>
+			<hbox align="top" vflex="1" hflex="1">	
+				<textbox id="attendees" multiline="true" hflex="1" vflex="1"></textbox>
+			</hbox>
+		</groupbox>
+		<groupbox hflex="1" vflex="1">
+			<caption>
+				<div>
+					<label>Critique of prior week: (Effectiveness of strategy, forecast accuracy, significant segment trends versus prior year)</label>
+				</div>
+			</caption>
+			<hbox align="top" vflex="1" hflex="1">	
+				<textbox id="critique" multiline="true" hflex="1" vflex="1"></textbox>
+			</hbox>
+		</groupbox>
+		
+	</vbox>
+</zk>

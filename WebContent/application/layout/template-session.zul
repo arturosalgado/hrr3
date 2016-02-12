@@ -1,0 +1,27 @@
+<zk>
+	<!-- create only when the user is loggedIn  -->
+	<borderlayout hflex="1" vflex="1" if="${sessionScope.userData != null}" onClientInfo="onClientInfo(event)">
+	
+		<center id="mainContent" autoscroll="true" border="none" self="@insert(content)" >
+			<!-- the main content will be insert to here -->
+		</center>
+		
+	<zscript>
+     void onClientInfo(ClientInfoEvent evt) {
+         
+         	 Session sess = Sessions.getCurrent();
+         		
+             System.out.println("Current width: " + evt.getDesktopWidth());
+             System.out.println("Current height: " + evt.getDesktopHeight());
+             
+             com.hrr3.entity.User user = (com.hrr3.entity.User)sess.getAttribute("userData");                   
+            
+             user.getScreenPreferences().setWidth(evt.getDesktopWidth() - 150);
+             user.getScreenPreferences().setHeight(evt.getDesktopHeight() - 200);
+     }
+    </zscript>	
+		
+		
+	</borderlayout>
+
+</zk>

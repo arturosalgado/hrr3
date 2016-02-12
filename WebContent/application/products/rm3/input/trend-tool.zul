@@ -1,0 +1,74 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk xmlns:h='http://www.w3.org/1999/xhtml'>
+	
+	<window id="trendDialog" position="center,center" border="normal" maximizable="true" sizable="true" apply="com.hrr3.controller.TrendToolController" closable="true" title="Trend Forecast"
+			action="show:slideDown; hide:slideUp" >
+		<style id="customStyle"/>	
+	<vbox id="trendBox"  hflex="1" vflex="1">
+		
+		<hbox hflex="1" height="70px" pack="center" align="center" style="border: 1px solid #c5c5c5;">
+			
+			<vbox hflex="1" align="center" pack="center">			
+				<hbox>
+					<hbox hflex="1" style="padding: 15px;" pack="end">
+								<button id="printGridBtn" label="Print Grid" height="40px" disabled="true"/><separator width="5px"/>							
+								<button id="calculateTrendBtn" label="Calculate Trend" height="40px" disabled="true"/><separator width="5px"/>
+					</hbox>		
+					<groupbox hflex="1" style="padding: 5px;">
+						<caption>
+							<div>
+								<label>Trend New</label>
+							</div>
+						</caption>
+						<hbox hflex="1" style="padding: 5px;">
+							<datebox id="trendNewStatDate" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+							<datebox id="trendNewEndDate" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+						</hbox>
+					</groupbox>
+					<groupbox hflex="1" style="padding: 5px;">
+						<caption>
+							<div>
+								<label>Trend Old</label>
+							</div>
+						</caption>
+						<hbox hflex="1" style="padding: 5px;">
+							<datebox id="trendOldStatDate" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+							<datebox id="trendOldEndDate" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+						</hbox>
+					</groupbox>
+					<groupbox hflex="1" style="padding: 5px;">
+						<caption>
+							<div>
+								<label>Forecast Baseline</label>
+							</div>
+						</caption>
+						<hbox hflex="1" style="padding: 5px;">
+							<datebox id="forecastBaseStatDate" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+							<datebox id="forecastBaseEndDate" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+						</hbox>	
+					</groupbox>	
+					
+					<hbox hflex="1" style="padding: 15px;" pack="end">
+								<button id="trendGO" label="GO" height="40px" /><separator width="5px"/>
+								<button id="pasteBtn" label="Paste Forecast" height="40px" disabled="true" /><separator width="5px"/>
+								<button id="advanceBtn" label="Advanced Pasting" height="40px" disabled="true"/><separator width="5px"/>
+								<!-- <button id="exitBtn" label="Exit" height="40px" /> -->
+					</hbox>		
+						
+				</hbox>
+			</vbox>		
+				
+		</hbox>
+
+		<hbox hflex="1" vflex="1" >
+					
+			<listbox id="genericListBox" ctrlKeys="#left#right#up#down" hflex="1" height="${sessionScope.userData.screenPreferences.height}px" sizedByContent="true">
+			</listbox>
+
+		</hbox>
+
+	</vbox>
+	
+</window>	
+
+</zk>

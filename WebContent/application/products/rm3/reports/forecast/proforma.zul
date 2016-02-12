@@ -1,0 +1,318 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="proformaDialog"
+		apply="com.hrr3.controller.reports.forecast.ProFormaController" maximizable="true" sizable="true"
+		position="center,center" closable="true" width="1000px" height="900px"
+		action="show:slideDown; hide:slideUp" border="normal">
+		
+		<zscript>
+			  import java.text.SimpleDateFormat;
+			  import java.util.Date;
+			  import java.util.Calendar;
+	  
+	  		  Date currentDate = new Date();  		  
+  		  </zscript>
+
+		<vbox vflex="1" hflex="1">
+			<hbox height="325px" hflex="1">
+				<vbox vflex="1">
+					<groupbox style="padding: 4px;">
+						<caption>
+							<div>
+								<label>Part One</label>
+							</div>
+						</caption>
+						<vbox style="padding: 2px;">	
+							<hbox>
+								<vbox style="padding: 2px;">
+									<label value="."></label>	
+									<label width="30px" value="Rms"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>All</label>	
+									<intbox id="partARmsAllWeekDays" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Sun</label>	
+									<intbox id="partARmsSunday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Mon</label>	
+									<intbox id="partARmsMonday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Tues</label>	
+									<intbox id="partARmsTuesday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Wed</label>	
+									<intbox id="partARmsWednesday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Thurs</label>	
+									<intbox id="partARmsThursday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Fri</label>	
+									<intbox id="partARmsFriday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Sat</label>	
+									<intbox id="partARmsSaturday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Date(From-To)</label>	
+									<datebox id="partADateFrom" width="100px" format="MM/dd/yyyy" value="${currentDate}"/>						
+								</vbox>								
+							</hbox>		
+							<hbox>
+								<vbox style="padding: 2px;">
+									<label value="ADR"></label>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRAllWeekDays" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRSunday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRMonday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRTuesday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRWednesday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRThursday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRFriday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partAADRSaturday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<datebox id="partADateTo" width="100px" format="MM/dd/yyyy" value="${currentDate}"/>							
+								</vbox>
+								
+							</hbox>								
+						</vbox>
+					</groupbox>
+					<groupbox style="padding: 4px;">
+						<caption>
+							<div>
+								<label>Part Two</label>
+							</div>
+						</caption>
+						<vbox style="padding: 2px;">	
+							<hbox>
+								<vbox style="padding: 2px;">
+									<label value="."></label>	
+									<label width="30px" value="Rms"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>All</label>	
+									<intbox id="partBRmsAllWeekDays" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Sun</label>	
+									<intbox id="partBRmsSunday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Mon</label>	
+									<intbox id="partBRmsMonday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Tues</label>	
+									<intbox id="partBRmsTuesday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Wed</label>	
+									<intbox id="partBRmsWednesday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Thurs</label>	
+									<intbox id="partBRmsThursday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Fri</label>	
+									<intbox id="partBRmsFriday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Sat</label>	
+									<intbox id="partBRmsSaturday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<label>Date(From-To)</label>	
+									<datebox id="partBDateFrom" width="100px" format="MM/dd/yyyy" value="${currentDate}"/>						
+								</vbox>								
+							</hbox>		
+							<hbox>
+								<vbox style="padding: 2px;">
+									<label value="ADR"></label>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRAllWeekDays" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRSunday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRMonday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRTuesday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRWednesday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRThursday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRFriday" width="30px"/>							
+								</vbox>
+								<vbox style="padding: 2px;">
+									<intbox id="partBADRSaturday" width="30px"/>						
+								</vbox>
+								<vbox style="padding: 2px;">
+									<datebox id="partBDateTo" width="100px" format="MM/dd/yyyy" value="${currentDate}"/>							
+								</vbox>
+								
+							</hbox>								
+						</vbox>
+					</groupbox>
+					<groupbox style="padding: 4px;">
+						<caption>
+							<div>
+								<label>Revenue</label>
+							</div>
+						</caption>
+						<vbox style="padding: 2px;">
+							<hbox style="padding: 2px;"><label value="FB Revenue"/><separator width="11px"/><intbox id="fBRevenue"/><label value="Profit %"/><intbox id="fBRevenueProfitPct" maxlength="3"/><label value="Profit"/><intbox id="fBRevenueProfit" disabled="true"/></hbox>							
+							<hbox style="padding: 2px;"><label value="Other Revenue"/><intbox id="otherRevenue"/><label value="Profit %"/><intbox id="otherRevenueProfitPct" maxlength="3"/><label value="Profit"/><intbox id="otherRevenueProfit" disabled="true"/></hbox>
+						</vbox>
+					</groupbox>
+				</vbox>
+				<vbox vflex="1" hflex="1">
+					<hbox hflex="1" style="padding: 4px;">
+						<groupbox  height="104px" hflex="1">
+							<caption>
+								<div>
+									<label>CPOR</label>
+								</div>
+							</caption>
+							<hbox style="padding: 2px;" vflex="1">	
+								<vbox style="padding: 2px;">
+									<label value="Displaced:"/>
+									<separator></separator>
+									<label value="Base:"/>					
+								</vbox>
+								<vbox style="padding: 2px;">
+									<decimalbox  id="displaced" format="###,###,###.00" locale="zh_TW" />
+									<decimalbox  id="base" format="###,###,###.00" locale="zh_TW" />					
+								</vbox>							
+							</hbox>
+						</groupbox>	
+						<groupbox height="104px" hflex="1">
+							<caption>
+								<div>
+									<label>Total Rooms</label>
+								</div>
+							</caption>
+							<hbox style="padding: 2px;" hflex="1" vflex="1" pack="center" align="center">
+								<label id="totalRooms" style="font-size: 20px;"  value="34"/>						
+							</hbox>
+						</groupbox>	
+					</hbox>	
+					<hbox hflex="1" vflex="1" style="padding: 4px;">
+						<groupbox vflex="1" hflex="1">
+								<caption>
+									<div>
+										<label>Snapshot</label>
+									</div>
+								</caption>
+								<vbox hflex="1" vflex="1">
+									<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Snapshot:</label>					
+										<combobox id="forecastSnapshot" readonly="true" model="${proformaDialog$composer.snapshotsForecastModel}"	hflex="2">												
+											<template name="model">
+												<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+												</comboitem>
+											</template>					
+										</combobox>				
+									</hbox>
+									<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Dates From-To:</label>					
+										<datebox id="statDateFrom" hflex="1" format="MM/dd/yyyy" constraint="no empty" value="${currentDate}"/>	
+										<datebox id="statDateTo" hflex="1" format="MM/dd/yyyy" constraint="no empty" value="${currentDate}"/>				
+									</hbox>
+									<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Group Name:</label>					
+										<textbox id="groupName" hflex="2"/>				
+									</hbox>
+									<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Alternate Row Color:</label>					
+										<checkbox hflex="2"/>	 			
+									</hbox>
+									<hbox style="padding: 2px;" hflex="1">	
+										<button id="saveSettingsBtn" label="Save Settings" hflex="1"  height="50px"></button>					
+										<button id="loadReportBtn" label="Load Report" hflex="1" height="50px"></button>
+										<button id="printReportBtn" label="Print Report" hflex="1" height="50px" disabled="true"></button>	
+										<button id="exitReportBtn" label="Exit" hflex="1" height="50px"></button>			
+									</hbox>
+								</vbox>
+								
+						</groupbox>	
+					</hbox>	
+					
+				</vbox>
+				
+			</hbox>
+			
+			<hbox vflex="1" hflex="1" style="padding: 4px;">
+				<grid id="proformaGrid" hflex="1" vflex="1" sizedByContent="true">
+					<auxhead id="proformaAuxHeaders">	
+						<auxheader label="General Information" colspan="3" width="300px" align="center"/>	
+						<auxheader label="Baseline Forecast" colspan="3" align="center"/>
+						<auxheader label="Change" hflex="1" colspan="3" align="center"/>	
+						<auxheader label="Pro Forma Basis Forecast" colspan="3" align="center"/>	
+						<auxheader label="Proposed" colspan="2" align="center"/>		
+						<auxheader label="Displaced" colspan="2" align="center"/>		
+						<auxheader label="New Totals" colspan="4" align="center"/>	        
+			    	</auxhead>
+			    	<frozen style="background: #DFDED8" columns="6">
+                		<div style="padding: 0 10px;" />
+            		</frozen>
+			    	<columns>
+			    		<column>Comments</column>
+			    		<column>DOW</column>
+			    		<column>Date</column>
+			    		<column>Rms</column>
+			    		<column>Rate</column>
+			    		<column>Rev</column>
+			    		<column>Rms</column>
+			    		<column>Rate</column>
+			    		<column>Rev</column>
+			    		<column>Occ Rms</column>
+			    		<column>Total ADR</column>
+			    		<column>Room Rev</column>
+			    		<column>Base</column>
+			    		<column>Rate</column>
+			    		<column>Rooms</column>
+			    		<column>Inc. Rev</column>
+			    		<column>Room Rev</column>
+			    		<column>Inc. Profit</column>
+			    		<column>Disp. ADR</column>
+			    		<column>Disp. ADR Overwrite</column>
+			    	</columns>
+			    	<rows>				    		    	
+			   		</rows>
+				</grid>
+			</hbox>
+
+		</vbox>
+	</window>
+</zk>

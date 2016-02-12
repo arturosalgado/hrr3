@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Created by ZK Studio
+-->
+
+<zk>
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/timeout.zul</timeout-uri><!-- An empty URL can cause the browser to reload the same URL -->
+		 <!-- Configure the progress message to show in the center -->
+    <embed><![CDATA[
+        <script type="text/javascript">
+            AU_progressbar = function (id, msg) 
+            {
+                Boot_progressbox(id, msg, 0, 0, true, true);
+            };
+        </script>
+    ]]></embed>
+	</device-config>
+	
+	<library-property>
+    <name>org.zkoss.zul.nativebar</name>
+    <value>true</value>
+</library-property>
+
+
+</zk>

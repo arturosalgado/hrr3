@@ -1,0 +1,63 @@
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<zk>
+	<vbox hflex="1" vflex="1" align="center" pack="center">
+		<hbox align="center" id="mainContent" pack="center" spacing="20px">
+			<vlayout>
+				<window id="loginWin"
+					apply="com.hrr3.controller.LoginController"
+					title="HRR Login" border="normal" hflex="min">
+					<vbox hflex="min" align="center" id="vboxContainer">
+					
+						<grid hflex="min" id="gridContainer">
+						
+							<columns>
+								<column hflex="min" align="right" />
+								<column hflex="min" />
+							</columns>
+							<rows id="loginRows">
+								
+								<row>
+									<cell colspan="2" align="center">
+										<image src="/images/hrr3/logo.jpg" />	
+									</cell>															
+								</row>
+								
+								<row>
+									Username :
+									<textbox id="account" width="180px" />
+								</row>
+								<row>
+									Password :
+									<textbox id="password" type="password"
+										width="180px" />
+								</row>
+								<row id="customerRow" visible="false">
+									Customer :							
+								</row>		
+								
+								<row>
+									<cell colspan="2" align="center" id="loginButtonContainer">
+										<button id="login" label="LogIn" image="/images/login/login.png" dir="reverse" />	
+									</cell>															
+								</row>
+								
+								<row>
+									<cell colspan="2" align="center">
+										<label id="message" sclass="warn" value="&#160;" />	
+									</cell>															
+								</row>
+								
+							</rows>
+						</grid>
+						
+						
+						
+						
+					</vbox>
+				</window>
+			
+			</vlayout>
+		</hbox>		
+	</vbox>
+		
+</zk>

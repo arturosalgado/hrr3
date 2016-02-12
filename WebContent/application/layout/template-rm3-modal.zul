@@ -1,0 +1,17 @@
+<zk>
+
+	
+	<window id="rm3EmbededWindow" title="RM3 - Workspace" if="${sessionScope.userData != null}" hflex="1" vflex="1" border="normal">	
+		<caption self="@{insert(rm3HeaderFix)}"/>
+		<hbox self="@insert(rm3ContentFix)"></hbox>
+		</window>
+	
+	<window id="rm3Window" title="RM3 - Workspace" if="${sessionScope.userData != null}" hflex="1" vflex="1" border="normal"
+	mode="modal" closable="true">	
+		<caption self="@insert(rm3HeaderModal)"/>
+		<hbox self="@insert(rm3ContentModal)"></hbox>	
+		
+	</window>	
+        
+
+</zk>

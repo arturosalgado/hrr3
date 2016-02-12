@@ -1,0 +1,111 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="popupMarketSegmentsDialog" width="400px" height="600px"
+		apply="com.hrr3.controller.reports.forecast.MarketSegmentController"
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal">
+
+		<vbox vflex="1" hflex="1">
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Snapshot and Report Year</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">
+					<combobox id="snapshotBaseCombo" readonly="true" model="${popupMarketSegmentsDialog$composer.snapshotsBaseModel}"	width="300px">
+						<attribute name="onCreate">	if(self.getModel() != null ) self.setSelectedIndex(0);</attribute>	
+						<template name="model">
+							<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+							</comboitem>
+						</template>					
+					</combobox>
+					<combobox id="yearCombo" readonly="true" width="180px">
+						<attribute name="onCreate">self.setSelectedIndex(6);</attribute>
+						<comboitem label="2009" value="2009" />
+						<comboitem label="2010" value="2010" />
+						<comboitem label="2011" value="2011" />
+						<comboitem label="2012" value="2012" />
+						<comboitem label="2013" value="2013" />
+						<comboitem label="2014" value="2014" />
+						<comboitem label="2015" value="2015" />
+						<comboitem label="2016" value="2016" />
+						<comboitem label="2017" value="2017" />
+						<comboitem label="2018" value="2018" />
+						<comboitem label="2019" value="2019" />
+					</combobox>
+				</vbox>
+			</groupbox>
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Compare To</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">
+				<radiogroup id="SnapshotsCompareToGroup">
+					<attribute name="onCreate">self.setSelectedIndex(0);</attribute>
+					<radio id="previousYearRadio" label="Previous Year"	value="1" />
+					<hbox hflex="1" style="padding-top: 5px;">
+						<radio id="selectSnapshotToCompareRadio" />
+						<combobox id="snapshotCompareCombo"	readonly="true" disabled="true"  model="${popupMarketSegmentsDialog$composer.snapshotsCompareModel}" width="300px">
+							<attribute name="onCreate">if(self.getModel() != null ) self.setSelectedIndex(0);</attribute>
+							<template name="model">
+								<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+								</comboitem>
+							</template>	
+						</combobox>
+					</hbox>
+				</radiogroup>
+					
+					
+				</vbox>
+			</groupbox>
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Data Included</label>
+					</div>
+				</caption>
+				<vbox hflex="1">				
+					<radiogroup id="dataIncGroup">
+						<attribute name="onCreate">self.setSelectedIndex(0);</attribute>				
+						<vbox hflex="1" style="padding: 10px;">
+							<radio id="IncDataType1" label="Definities and Tentatives" value="DefAndTen"/>
+							<radio id="IncDataType2" label="Definities Only" value="DefOnly"/>	
+							<radio id="IncDataType3" label="Tentatives Only" value="TenOnly"/>									
+						</vbox>
+					</radiogroup>					
+				</vbox>
+			</groupbox>
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Report Formatting</label>
+					</div>
+				</caption>
+				<vbox hflex="1">				
+					<radiogroup id="formattingGroup">
+						<attribute name="onCreate">self.setSelectedIndex(0);</attribute>				
+						<vbox hflex="1" style="padding: 10px;">
+							<radio id="reportFormat1" label="Normal Formatting" value="1"/>		
+							<radio id="reportFormat2" label="Compact Formatting" value="2"/>															
+						</vbox>
+					</radiogroup>					
+				</vbox>
+			</groupbox>
+
+			<hbox style="padding: 2px;" hflex="1" pack="end">
+				<button id="printReportBtn" height="40px" width="80px"
+					autodisable="self" label="Print" />
+				<button id="exitReportBtn" height="40px"
+					autodisable="self" label="Exit" width="80px" />
+			</hbox>
+
+		</vbox>
+	</window>
+</zk>

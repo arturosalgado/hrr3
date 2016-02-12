@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <spreadsheet id="spreadsheet" src="/WEB-INF/books/hersha-input-screen.xlsx"
+         height="900px" width="1000px" showFormulabar="true" />
+</window>

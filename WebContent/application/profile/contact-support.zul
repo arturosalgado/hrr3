@@ -1,0 +1,51 @@
+<zk>
+<window id="contactSupportForm" width="450px"  title="Contact Support"
+		apply="com.hrr3.controller.ContactSupportController"
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal">
+		
+	<grid hflex="1">
+		<columns>
+			<column label="Option" width="100px" />
+			<column label="Input" />
+		</columns>
+		<rows>
+			<row>
+				Reason :
+				<hlayout>
+					<combobox id="reasonsCombo" readonly="true"	width="305px" model="${contactSupportForm$composer.reasonsModel}">
+						<attribute name="onCreate">	if(self.getModel() != null ) self.setSelectedIndex(0);</attribute>	
+						<template name="model">
+							<comboitem label="${each}" value="${each}">								
+							</comboitem>
+						</template>					
+					</combobox>				
+					<separator orient="vertical" spacing="3px" />
+					
+				</hlayout>
+			</row>
+			<row>
+				Subject :
+				<hlayout>
+					<textbox id="subjectTxt" width="300px" constraint="no empty" />
+					<separator orient="vertical" spacing="3px" />					
+				</hlayout>
+			</row>
+			<row>
+				Message:
+				<hlayout>
+					<textbox id="messageTxt" rows="10" width="300px" constraint="no empty" />
+				</hlayout>
+			</row>
+			<row>		
+			Send Email:		
+				<hlayout>				
+					<button id="submitBtn" label="Submit" />
+				</hlayout>
+			</row>
+		</rows>
+	</grid>
+	
+	
+	</window>
+</zk>

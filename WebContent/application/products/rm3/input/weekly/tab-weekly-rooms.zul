@@ -1,0 +1,46 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox id="weeklyRoomsTabContainer" hflex="1" vflex="1" apply="com.hrr3.controller.WeeklyRoomsTabController">
+		<groupbox hflex="1" vflex="1">
+			<caption>
+				<div>
+					<label>Weekly Rooms Sales Pace:</label>
+				</div>
+			</caption>
+				
+			<vbox align="top" hflex="1" vflex="1">
+				<separator height="5px"></separator>	
+				<hbox>
+					<label hflex="1">
+				 		 Rooms picked up in the reservation system (from manual pick-up entry on SellStrat Tab) since: 
+					</label>
+					<label value="${weeklyRoomsTabContainer$composer.transotbEntered}"/>
+				</hbox>
+			 		 
+				
+				<separator height="5px"></separator>
+				<hbox hflex="1">
+					<label>Pick-Up Since:</label>
+					<combobox id="ssrSnapshotsCombo" readonly="true" model="${weeklyRoomsTabContainer$composer.ssrSnapshotsModel}"	hflex="1">
+						<attribute name="onCreate">	if(self.getModel() != null ) self.setSelectedIndex(0);</attribute>	
+						<template name="model">
+							<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+							</comboitem>
+						</template>					
+						</combobox>
+					<button id="loadDataBtn" label="GO"></button>
+				</hbox>
+				<separator height="5px"></separator>				
+				
+				<grid id="salesPaceGrid" hflex="1" vflex="1" >
+				<columns>
+					<column width="150px">Type</column>					
+				</columns>
+				<rows></rows>
+				</grid>
+			</vbox>
+		</groupbox>
+		
+		
+	</vbox>
+</zk>

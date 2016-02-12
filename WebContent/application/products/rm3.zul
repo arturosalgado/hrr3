@@ -1,0 +1,171 @@
+<zk>
+	<zscript>
+	com.hrr3.services.RM3SecurityService securityService = new com.hrr3.services.RM3SecurityService();
+	Session sess = Sessions.getCurrent();
+	com.hrr3.entity.User user = (com.hrr3.entity.User)sess.getAttribute("userData");
+	int rm3RoleId = user.getRm3Role().getValue();
+	</zscript>
+	<vbox hflex="1" vflex="1">
+		<hbox hflex="1" height="90px">
+	
+			<groupbox vflex="1">
+				<caption>
+					<div>
+						<label>Forecasting</label>
+					</div>
+				</caption>
+				<hbox align="top" vflex="1">
+					<toolbarbutton id="dataBtn" image="/images/rm3/data.png"
+						label="Data" style="text-align:center; font-size:11px;"
+						popup="dataPopup" if="${securityService.getIsMenuOptionEnabled(1, rm3RoleId)}"
+						width="65px" orient="vertical" />
+					<toolbarbutton id="inputBtn"
+						image="/images/rm3/input.png" label="Input"
+						style="text-align:center; font-size:11px;" width="65px"
+						popup="inputPopup" if="${securityService.getIsMenuOptionEnabled(2, rm3RoleId)}"
+						orient="vertical" />		
+					<toolbarbutton id="reportsForcastBtn"
+						image="/images/rm3/reports.png" label="Reports"
+						style="text-align:center; font-size:11px;" width="65px"
+						popup="reportsForecastPopup" if="${securityService.getIsMenuOptionEnabled(3, rm3RoleId)}"
+						orient="vertical" />									
+					<toolbarbutton id="adminBtn"
+						image="/images/rm3/admin.png" label="Admin"
+						style="text-align:center; font-size:11px;" width="65px"
+						popup="adminPopup" if="${securityService.getIsMenuOptionEnabled(4, rm3RoleId)}"
+						orient="vertical" />
+	
+				</hbox>
+			</groupbox>
+	
+			<groupbox vflex="1">
+				<caption>
+					<div>
+						<label>Sell Strategy</label>
+					</div>
+				</caption>
+				<hbox align="top" vflex="1">
+					<toolbarbutton id="importBtn"
+						image="/images/rm3/import.png" label="Import"
+						style="text-align:center; font-size:11px;" width="65px"
+						popup="importPopup" if="${securityService.getIsMenuOptionEnabled(5, rm3RoleId)}"
+						orient="vertical" />
+					<toolbarbutton id="setupBtn"
+						image="/images/rm3/setup.png" label="SetUp"
+						style="text-align:center; font-size:11px;" width="65px"
+						popup="setupPopup" if="${securityService.getIsMenuOptionEnabled(6, rm3RoleId)}"
+						orient="vertical" />
+					<toolbarbutton id="inputSrrBtn"
+						image="/images/rm3/input.png" label="Input"
+						style="text-align:center; font-size:11px;" width="65px"
+						popup="inputSSRPopup" if="${securityService.getIsMenuOptionEnabled(7, rm3RoleId)}"
+						orient="vertical" />
+					<toolbarbutton id="reportsSrrBtn"
+						image="/images/rm3/reports.png" label="Reports"
+						style="text-align:center; font-size:11px;" width="65px"
+						popup="reportsSSRPopup" if="${securityService.getIsMenuOptionEnabled(8, rm3RoleId)}"
+						orient="vertical" />
+	
+				</hbox>
+			</groupbox>
+	
+	
+		</hbox>
+
+	<!-- Administration Content -->
+	<hbox hflex="1" vflex="1" align="center" pack="center">
+	
+		<include id="includeRM3Component" mode="defer"
+			src="/application/products/rm3/readme.zul"			
+			 hflex="1" vflex="1" />	
+			
+	</hbox>
+
+	<menupopup id="dataPopup">
+						<menuitem label="Import Actuals" value="/application/products/rm3/data/brains.zul" onClick="includeRM3Component.setSrc(self.value);" disabled="${!sessionScope.userData.currentHotel.isValidActualVendorId}" tooltiptext="${!sessionScope.userData.currentHotel.isValidActualVendorId == true ? 'No HotelCode for this import detected.' : 'Import Actual Data.' }" />
+						<menuitem label="Import Group on the Books" value="/application/products/rm3/data/hsp.zul" onClick="includeRM3Component.setSrc(self.value);" disabled="${!sessionScope.userData.currentHotel.isValidGroupVendorId}" tooltiptext="${!sessionScope.userData.currentHotel.isValidGroupVendorId == true ? 'No HotelCode for this import detected.' : 'Import Group Data.' }"/>
+						<menuitem label="From File" value="/application/products/rm3/data/file.zul" onClick="includeRM3Component.setSrc(self.value);"/>
+	</menupopup>
+	
+	<menupopup id="inputPopup">										
+																		
+						<menuitem label="Group" onClick='Executions.getCurrent().sendRedirect("/application/products/rm3/input/group.zul", "_blank");' />												
+						<menuitem label="Transient" onClick='Executions.getCurrent().sendRedirect("/application/products/rm3/input/transient.zul", "_blank");' />
+					<!-- <menuitem label="Transient Test" onClick='Executions.getCurrent().sendRedirect("/application/products/rm3/input/transientTest.zul", "_blank");' />  -->
+	</menupopup>
+	
+		<menupopup id="reportsForecastPopup">						
+						<menuitem label="Market Mix Analysis" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/market-mix.zul", null, null)).doModal();' />
+						<menuitem label="Market Segment" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/market-segments.zul", null, null)).doModal();' />
+						<menuitem label="Month End Analysis" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/month-end-analysis.zul", null, null)).doModal();' />					
+						<menuitem label="Annual Room Revenue Analysis" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/annual-room-revenue.zul", null, null)).doModal();' />
+						<menuitem label="Group Monthly" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/group-monthly.zul", null, null)).doModal();' />						
+						<menuitem label="Day By Day" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/day-by-day.zul", null, null)).doModal();' />
+						<menuitem label="Pro Forma" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/proforma.zul", null, null)).doModal();' />					
+						<menuitem label="Internet Strategy Effectiveness" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/internet-strategy.zul", null, null)).doModal();' />						
+						<menuitem label="Renovation Impact" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/renovation-impact.zul", null, null)).doModal();' />
+						
+						<menuseparator />
+						
+							<menu id="rollUpReportsPopup" label="Roll-Up Reports">
+								<menupopup>									
+									<menuitem label="Forecast Accuracy" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/rollup/forecast-accuracy.zul", null, null)).doModal();' />
+									<menuitem label="Market Mix Analysis" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/rollup/market-mix.zul", null, null)).doModal();' />
+									<menuitem label="Need Date Calendar" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/rollup/need-date-calendar.zul", null, null)).doModal();' />									
+									<menuitem label="Annual Room Revenue" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/rollup/annual-room-revenue.zul", null, null)).doModal();' />
+									<menuitem label="Weekly Meeting Minutes" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/forecast/rollup/weekly-meeting.zul", null, null)).doModal();' />
+								</menupopup>							
+							</menu>
+						
+						
+						
+						
+	</menupopup>
+	
+	<menupopup id="adminPopup">
+						<menuitem label="Data Status" onClick='((Window)Executions.createComponents("/application/products/rm3/admin/data-status.zul", null, null)).doModal();' />
+						<!-- <menuitem label="Total Rooms" onClick="alert(self.label)" />  -->
+						<menuitem label="Snapshots" value="/application/products/rm3/admin/snapshot.zul" onClick="includeRM3Component.setSrc(self.value);" />
+						<menuitem label="Report Settings" value="/application/products/rm3/admin/report-settings.zul" onClick="includeRM3Component.setSrc(self.value);" />
+	</menupopup>
+	
+	<menupopup id="importPopup">	
+						<menuitem label="SSR" onClick='((Window)Executions.createComponents("/application/products/rm3/import/ssr-import.zul", null, null)).doModal();' />
+						<menuitem label="LRR" onClick='((Window)Executions.createComponents("/application/products/rm3/import/lrr-import.zul", null, null)).doModal();' />					
+						<menuitem label="Weekly STAR" onClick='((Window)Executions.createComponents("/application/products/rm3/import/daystar-import.zul", null, null)).doModal();' />
+						<menuitem label="Monthly STAR" onClick='((Window)Executions.createComponents("/application/products/rm3/import/star-import.zul", null, null)).doModal();' />
+	</menupopup>
+	
+	<menupopup id="setupPopup">	
+						<menuitem label="Group MAR Rate" onClick='((Window)Executions.createComponents("/application/products/rm3/setup/mar-setup.zul", null, null)).doOverlapped();' />					
+						<menuitem label="Lowest Retail Rate" onClick='((Window)Executions.createComponents("/application/products/rm3/setup/lrr-setup.zul", null, null)).doOverlapped();' />					
+						<menuitem label="Rate Category" onClick='((Window)Executions.createComponents("/application/products/rm3/setup/rate-cat-setup.zul", null, null)).doOverlapped();' />
+						<menuitem label="Weekly Meeting Snapshot" value="/application/products/rm3/setup/ssr-snapshot.zul" onClick="includeRM3Component.setSrc(self.value);" />						
+	</menupopup>	
+     
+	<menupopup id="inputSSRPopup">										
+						<menuitem label="SSR" onClick='Executions.getCurrent().sendRedirect("/ssrcontroller", "_blank");' />
+						<!--menuitem label="SSR(1)" onClick='Executions.getCurrent().sendRedirect("/application/products/rm3/input/ssr.zul", "_blank");' /-->
+						<menuitem label="Weekly Meeting Minutes" onClick='((Window)Executions.createComponents("/application/products/rm3/input/weekly.zul", null, null)).doOverlapped();' />
+	</menupopup>	 
+
+	<menupopup id="reportsSSRPopup">						
+						<menuitem label="Annual Room Revenue" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/annual-room-revenue.zul", null, null)).doModal();' />
+						<menuitem label="Monthly Forecast Summary" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/monthly-forecast-summary.zul", null, null)).doModal();' />
+						<menuitem label="Transient Pace Analysis" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/transient-pace.zul", null, null)).doModal();' />												
+						<menuitem label="Weekly STAR" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/weekly-star.zul", null, null)).doModal();' />							
+						<menuitem label="Sell Strategy" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/sell-strategy.zul", null, null)).doModal();' />						
+						<menuitem label="Monthly STAR" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/monthly-star.zul", null, null)).doModal();' />					
+						<menuitem label="Transient Trend" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/transient-trend.zul", null, null)).doModal();' />
+						<menuitem label="Weekly Meeting Minutes" onClick='((Window)Executions.createComponents("/application/products/rm3/reports/ssr/weekly-meeting.zul", null, null)).doModal();' />
+						
+	</menupopup>		
+		 
+     
+    </vbox> 
+     
+     
+             	
+     
+     
+</zk>

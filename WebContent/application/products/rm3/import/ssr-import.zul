@@ -1,0 +1,84 @@
+<zk>
+	<window id="importForm" height="500px" width="400px"
+		apply="org.zkoss.bind.BindComposer"
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal"
+		viewModel="@id('vm') @init('com.hrr3.modelview.SSRImportFileMV')">
+		
+		
+		<vbox vflex="1" hflex="1">
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Source File</label>
+					</div>
+				</caption>
+				<hbox hflex="1" style="padding: 10px;">
+					<textbox id="SSRFileName" value="@bind(vm.fileName)" disabled="true" width="200px"/>
+				
+				<button label="Browse..." upload="true"
+					onUpload="@command('onUploadFile',upEvent=event)">
+				</button>
+				</hbox>
+			</groupbox>
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Date Range</label>
+					</div>
+				</caption>
+				<hbox hflex="1" style="padding: 10px;">
+						From:
+					<datebox id="ssrImportFrom" width="90px" disabled="@load(!vm.fileuploaded)"
+						constraint="no empty" format="MM/dd/yyyy" />
+		
+					To:
+					<datebox id="ssrImportTo" width="90px" constraint="no empty" disabled="@load(!vm.fileuploaded)"
+						format="MM/dd/yyyy" />
+				</hbox>
+			</groupbox>
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Data To Import</label>
+					</div>
+				</caption>
+				<vbox hflex="1">	
+						<hbox hflex="1" style="padding: 10px;">
+							<vbox hflex="1">
+								<checkbox id="chkComments" label="Comments"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>
+			        			<checkbox id="chkRestrictions" label="Restrictions"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>
+			        			<checkbox id="chkRooms" label="Rooms"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>			        												
+							</vbox>
+							<vbox hflex="1" pack="end">
+								<checkbox id="chkPrice" label="Price/Demand Turndowns"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>	
+								<checkbox id="chkBlockedRooms" label="Blocked Rooms"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>									
+							</vbox>
+						</hbox>								
+				</vbox>
+			</groupbox>
+
+			<hbox style="padding: 2px;" hflex="1" pack="end">
+				
+				<button label="Import Data" disabled="@load(!vm.fileuploaded)" autodisable="self" height="40px" width="80px"
+					onClick="@command('importData')">
+				</button>		
+				
+				<button id="exitSSRImportBtn" height="40px" onClick="@command('closePopup')"
+					autodisable="self" label="Exit" width="80px" />
+			</hbox>
+
+		</vbox>
+		
+		
+		
+
+	</window>
+
+
+
+
+</zk>

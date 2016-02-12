@@ -1,0 +1,55 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+
+	<hbox id="parentReportSettings"
+		apply="com.hrr3.controller.ReportSettingsController" hflex="1">
+
+		<listbox id="hotelsListBox" hflex="4" height="${sessionScope.userData.screenPreferences.height -150}px"
+					model="${parentReportSettings$composer.hotelsModel}">
+					<listhead>
+						<listheader label="Hotel List" />
+					</listhead>
+
+					<template name="model">
+						<listitem>
+							<listcell label="${each.name}"
+								value="${each.hotelId}" />
+						</listitem>
+					</template>
+
+		</listbox>
+		<listbox id="segmentsReportListBox" hflex="4" height="${sessionScope.userData.screenPreferences.height -150}px" checkmark="true" multiple="true"
+					model="${parentReportSettings$composer.segmentsReportModel}">
+					<listhead>
+						<listheader label="Include in Report" />
+					</listhead>
+
+					<template name="model">
+						<listitem selected="${each.isIncludeInReport}">
+							<listcell label="${each.name}"
+								value="${each.id}" />
+						</listitem>
+					</template>
+		</listbox>
+		<listbox id="segmentsTotalListBox" hflex="4" height="${sessionScope.userData.screenPreferences.height -150}px" checkmark="true" multiple="true"
+					model="${parentReportSettings$composer.segmentsTotalModel}">
+					<listhead>
+						<listheader label="Include in Total" />
+					</listhead>
+
+					<template name="model">
+						<listitem selected="${each.isIncludeInTotal}">
+							<listcell label="${each.name}"
+								value="${each.id}" />
+						</listitem>
+					</template>
+		</listbox>
+		<button id="applyChangesButton" hflex="1" vflex="1" disabled="true">Apply Changes</button>
+
+	</hbox>
+
+
+
+
+
+</zk>

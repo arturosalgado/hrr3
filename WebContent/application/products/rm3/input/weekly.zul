@@ -1,0 +1,52 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+
+	<window id="weeklyWindow" position="center,center" border="normal" maximizable="true" sizable="true" width="1000px" height="500px"
+			 closable="true" title="Weekly Sell Strategy Meeting Minutes"
+			action="show:slideDown; hide:slideUp" >
+			
+	<vbox id="parentWeeklyMeetingInput" apply="com.hrr3.controller.WeeklyMeetingTabsController"
+		hflex="1" vflex="1">
+		
+		<tabbox id="weeklyTabbox" vflex="1" hflex="1" >
+						<tabs id="Weeklytabs">
+							<tab id="Tab1" label="Attendees/Critique"/>
+							<tab id="Tab2" label="Weekly Rooms Sales Pace" />
+							<tab id="Tab3" label="High Demand Dates"/>
+							<tab id="Tab4" label="Soft Spots"/>
+							<tab id="Tab5" label="Group Pace" />
+							<tab id="Tab6" label="Outlook/Other"/>
+						</tabs>
+						<tabpanels>							
+							
+							<tabpanel vflex="1" hflex="1">
+								<include id="attendeesInclude" src="/application/products/rm3/input/weekly/tab-attendees.zul" />
+							</tabpanel>
+							<tabpanel vflex="1" hflex="1">
+								<include id="weeklyRoomsInclude" src="/application/products/rm3/input/weekly/tab-weekly-rooms.zul" />
+							</tabpanel>
+							<tabpanel vflex="1" hflex="1">
+								<include id="highDemandInclude" src="/application/products/rm3/input/weekly/tab-high-demand.zul" />
+							</tabpanel>
+							<tabpanel vflex="1" hflex="1">
+								<include id="softSpotsInclude" src="/application/products/rm3/input/weekly/tab-soft-spots.zul" />
+							</tabpanel>
+							<tabpanel vflex="1" hflex="1">
+								<include id="groupPaceInclude" src="/application/products/rm3/input/weekly/tab-group-pace.zul" />
+							</tabpanel>
+							<tabpanel vflex="1" hflex="1">
+								<include id="outlookInclude" src="/application/products/rm3/input/weekly/tab-outlook-other.zul" />
+							</tabpanel>
+							
+							
+						</tabpanels>
+					</tabbox>
+					<hbox hflex="1" id="testbox" pack="end">
+						<button id="saveWeeklyBtn" label="Save" />
+						<button label="Exit" onClick="weeklyWindow.detach();" />
+					</hbox>
+	</vbox>
+	
+	</window>
+
+</zk>

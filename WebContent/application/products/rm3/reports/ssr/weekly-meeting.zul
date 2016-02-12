@@ -1,0 +1,39 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="popupDialog" width="450px" height="200px"
+		apply="com.hrr3.controller.reports.ssr.WeeklyMeetingMinutesController"
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal">
+		
+		<vbox vflex="1" hflex="1">
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Pick-up since:</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">						
+					
+					<hbox hflex="1" style="padding-top: 5px;">					
+						<combobox id="snapshotsCombo" readonly="true" model="${popupDialog$composer.snapshotsModel}"	hflex="1">
+						<attribute name="onCreate">	if(self.getModel() != null ) self.setSelectedIndex(0);</attribute>	
+						<template name="model">
+							<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+							</comboitem>
+						</template>					
+						</combobox>
+					</hbox>
+				</vbox>
+			</groupbox>
+
+			
+			<hbox style="padding: 2px;" hflex="1" pack="end">
+				<button id="printReportBtn" height="40px" width="80px"
+					autodisable="self" label="Print" />
+				<button id="exitReportBtn" height="40px"
+					autodisable="self" label="Exit" width="80px" />
+			</hbox>
+
+		</vbox>
+	</window>
+</zk>

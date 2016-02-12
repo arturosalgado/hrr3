@@ -1,0 +1,65 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+
+	<hbox id="parentHSPImport" hflex="1" vflex="1" apply="com.hrr3.controller.HSPImportController">
+		<grid id="hspFormContainer" vflex="1" hflex="1">
+
+			<columns>
+				<column align="right" />
+				<column />
+			</columns>
+			<rows id="hspRows">				
+
+				<row>
+					<cell colspan="2" align="center">
+						<label>Import Group from HotelSalesPro</label>
+					</cell>
+				</row>
+				
+				<row>
+					<hbox>
+						From:
+						<datebox id="hspImportFrom" width="90px" constraint="no empty, no past"
+							format="MM/dd/yyyy" />
+					</hbox>
+					<hbox>
+						To:
+						<datebox id="hspImportTo" width="90px" constraint="no empty, no past"
+							format="MM/dd/yyyy" />
+					</hbox>
+				</row>
+				
+				<row>
+					<cell colspan="2" align="center">
+						<label>Step 1) Import segment data from Vendor</label>
+					</cell>
+				</row>
+				<row>
+					<cell colspan="2" align="center">
+						<label>Step 2) Convert data into Forecasting application</label>
+					</cell>
+				</row>
+				
+
+				<row>
+					<cell colspan="2" align="center">
+						<hbox>							
+							<button id="hspImportButton"
+								label="Import Data" height="40px" />
+						</hbox>
+
+					</cell>
+				</row>
+				
+				
+			</rows>
+		</grid>
+
+
+	</hbox>
+
+
+
+
+
+</zk>

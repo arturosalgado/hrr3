@@ -1,0 +1,58 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+	
+	<window id="rateCatPopup" position="center,center" border="normal" maximizable="true" sizable="true"
+			 closable="true" title="Rate Category Setup"
+			action="show:slideDown; hide:slideUp" >
+		
+	<vbox id="lrrBox" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.hrr3.modelview.RateCategorySetupViewModel')" hflex="1" vflex="1">
+		
+		<vbox hflex="1" height="70px" pack="center" align="center" style="border: 1px solid #c5c5c5;">
+						
+			<groupbox hflex="1" style="padding: 5px;">				
+				<vbox hflex="1">					
+					<hbox><label id="hotelNameLabel" value="@load(vm.currentHotel.name)"/></hbox>
+				</vbox>
+			</groupbox>
+			
+			<groupbox hflex="1" style="padding: 5px;" onCreate="@command('fillRateCatInfo')">
+				
+				<vbox width="300px">					
+					<hbox hflex="1"><label hflex="2">Default Column Name</label><label hflex="2">Hide in Screen</label><label hflex="1">Rename-As</label></hbox>
+					<hbox hflex="1"><label hflex="2">A1</label><checkbox checked="@bind(vm.rateCategory.columnAHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameA)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">B2</label><checkbox checked="@bind(vm.rateCategory.columnBHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameB)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">C3</label><checkbox checked="@bind(vm.rateCategory.columnCHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameC)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">D4</label><checkbox checked="@bind(vm.rateCategory.columnDHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameD)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">E5</label><checkbox checked="@bind(vm.rateCategory.columnEHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameE)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">F6</label><checkbox checked="@bind(vm.rateCategory.columnFHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameF)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">G7</label><checkbox checked="@bind(vm.rateCategory.columnGHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameG)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">H8</label><checkbox checked="@bind(vm.rateCategory.columnHHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameH)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">I9</label><checkbox checked="@bind(vm.rateCategory.columnIHiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameI)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">HP1</label><checkbox checked="@bind(vm.rateCategory.columnHP1HiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameHP1)" hflex="1"/></hbox>
+					<hbox hflex="1"><label hflex="2">HP2</label><checkbox checked="@bind(vm.rateCategory.columnHP2HiddenString)" hflex="2"/><textbox value="@bind(vm.rateCategory.columnNameHP2)" hflex="1"/></hbox>
+					
+				</vbox>
+			</groupbox>
+			
+			<groupbox hflex="1" style="padding: 5px;">				
+				<vbox hflex="1">					
+					<hbox hflex="1"><checkbox id="includeOverAll" checked="@bind(vm.rateCategory.oversellString)"/>Include Oversell Factor in Rooms Left to Sell Column</hbox>
+				</vbox>
+			</groupbox>
+			
+			<groupbox hflex="1" style="padding: 5px;">				
+				<vbox hflex="1">					
+					<hbox hflex="1"><button id="saveBtn" onClick="@command('saveCurrentConfig',popup=rateCatPopup)" label="Save" hflex="1"/><button id="exitBtn" onClick="rateCatPopup.detach()" label="Exit" hflex="1"/></hbox>
+				</vbox>
+			</groupbox>
+				
+				
+		</vbox>
+
+		
+
+	</vbox>
+	
+</window>	
+
+</zk>

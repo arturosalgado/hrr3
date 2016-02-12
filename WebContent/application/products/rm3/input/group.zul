@@ -1,0 +1,63 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+	<style>
+		tr.z-row td.z-row-inner, tr.z-row td.z-cell, tr.z-group td.z-group-inner, tr.z-groupfoot td.z-groupfoot-inner {
+		padding: 0px 0px 0px 0px;
+		}
+		.z-textbox, .z-decimalbox, .z-intbox, .z-longbox, .z-doublebox, .z-auxheader-cnt, div.z-column-cnt, div.z-row-cnt, .z-label {
+		font-size: 11px;
+		}
+	</style>
+<window position="center,center" border="normal" width="100%" height="100%" contentStyle="overflow:auto;" 
+			 title="Group Input Screen"
+			action="show:slideDown; hide:slideUp" >
+		
+	<vbox id="parentGroupTransient" apply="com.hrr3.controller.InputGroupGridController"
+		hflex="1" vflex="1">
+
+		<hbox width="100%" height="70px" pack="left" align="center" style="border: 1px solid #c5c5c5;">
+			<hbox hflex="1">	
+				<hbox pack="center" align="center" hflex="1">
+					<checkbox id="chkComments" label="Comments"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>
+        			<checkbox id="chkTotals" label="Tot"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>
+        			<checkbox id="chkDefinitive" label="Def"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>
+        			<checkbox id="chkTentative" label="Ten"><attribute name="onCreate">self.setChecked(true);</attribute></checkbox>					
+				</hbox>
+				<hbox pack="center" align="center" hflex="1">
+					Start Date: <datebox id="groupDateFrom" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+					End Date: <datebox id="groupDateTo" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+					<button id="groupSubmit" label="GO" width="40px" height="40px" />
+					<button id="printSubmit" label="Print" width="40px" height="40px" />
+				</hbox>
+			</hbox>
+		</hbox>
+
+		<hbox width="100%" height="100%">
+
+			<grid id="genericGrid" ctrlKeys="#left#right#up#down" hflex="1" height="${sessionScope.userData.screenPreferences.height + 100}px">
+							
+							
+				<auxhead id="segmentHeaders">	
+					<auxheader label="Total / Segments Header" />		        
+			    </auxhead>
+			    
+			    <frozen style="background: #DFDED8" columns="15">
+                	<div style="padding: 0 10px;" />
+            	</frozen>
+			    
+			    <columns>
+			    	<column>Totals/Segments</column>
+			    </columns>
+			    
+			    <rows>			    	
+			    </rows> 
+				
+
+			</grid>
+
+		</hbox>
+
+	</vbox>
+	</window>
+
+</zk>

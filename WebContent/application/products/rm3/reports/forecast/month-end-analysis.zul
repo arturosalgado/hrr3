@@ -1,0 +1,75 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="popupDialog" width="320px" height="370px"
+		apply="com.hrr3.controller.reports.forecast.MonthEndAnalysisController" 
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal">
+
+		<vbox vflex="1" hflex="1">
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Report Date Range</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">
+					<combobox id="yearCombo" readonly="true" width="180px">
+							<attribute name="onCreate">self.setSelectedIndex(0);</attribute>
+							<comboitem label="-- Select Year --" value="0" />
+							<comboitem label="2009" value="2009" />
+							<comboitem label="2010" value="2010" />
+							<comboitem label="2011" value="2011" />
+							<comboitem label="2012" value="2012" />
+							<comboitem label="2013" value="2013" />
+							<comboitem label="2014" value="2014" />
+							<comboitem label="2015" value="2015" />
+							<comboitem label="2016" value="2016" />
+							<comboitem label="2017" value="2017" />
+					</combobox>	
+				</vbox>
+				<vbox hflex="1" style="padding: 10px;">
+					<combobox id="monthCombo" readonly="true" width="180px">
+							<attribute name="onCreate">self.setSelectedIndex(0);</attribute>
+							<comboitem label="-- Select Month --" value="0" />
+							<comboitem label="January" value="1" />
+							<comboitem label="February" value="2" />
+							<comboitem label="March" value="3" />
+							<comboitem label="April" value="4" />
+							<comboitem label="May" value="5" />
+							<comboitem label="June" value="6" />
+							<comboitem label="July" value="7" />
+							<comboitem label="August" value="8" />
+							<comboitem label="September" value="9" />
+							<comboitem label="October" value="10" />
+							<comboitem label="November" value="11" />
+							<comboitem label="December" value="12" />
+					</combobox>	
+				</vbox>
+			</groupbox>
+			
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Report Type</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">
+					<checkbox id="dailyMix" label="Daily Mix Analysis"/>
+					<checkbox id="dayWeekStat" label="Day of Week Stats"/>
+					<checkbox id="dayWeekAvg" label="Day of Week Average Stats"/>
+				</vbox>				
+			</groupbox>
+
+			
+
+			<hbox style="padding: 2px;" hflex="1" pack="end">
+				<button id="printReportBtn" height="40px" width="80px"
+					autodisable="self" label="Print" />
+				<button id="exitReportBtn" height="40px"
+					autodisable="self" label="Exit" width="80px" />
+			</hbox>
+
+		</vbox>
+	</window>
+</zk>

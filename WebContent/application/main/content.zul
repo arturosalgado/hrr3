@@ -1,0 +1,48 @@
+<zk>
+	<style>.tab-main * { font-size: 15px !important; }</style>
+	
+	<zscript>
+	//Set ENUM values for ADMIN and USER to use in EL expression
+	int ADMIN = com.hrr3.entity.RoleType.ADMIN.value;
+	int USER = com.hrr3.entity.RoleType.USER.value;	
+	Session sess = Sessions.getCurrent();
+	com.hrr3.entity.User user = (com.hrr3.entity.User)sess.getAttribute("userData");	
+	boolean RM3_PRODUCT = false;
+	boolean EPVC_PRODUCT = false;	
+	if(user.role.value != ADMIN){	
+		RM3_PRODUCT = user.containsProduct(com.hrr3.entity.ProductType.RM3);
+		EPVC_PRODUCT = user.containsProduct(com.hrr3.entity.ProductType.EPVC);	
+	}
+	</zscript>
+	
+	<borderlayout hflex="1" vflex="1">
+		<!-- TABS BEGINS -->
+		<north size="100%" border="none">
+			<vbox width="100%" vflex="1" pack="center" align="center">
+				<hbox pack="center" align="center" vflex="1" 
+					hflex="100%">
+					<tabbox id="tb" vflex="1" hflex="1" >
+						<tabs id="tabs" sclass="tab-main">
+							<tab id="B" label="RM3" selected="true"   if="${sessionScope.userData.role.value==ADMIN || RM3_PRODUCT}" />
+							<tab id="C" label="ePVC"  if="${sessionScope.userData.role.value==ADMIN || EPVC_PRODUCT}" />
+							<tab id="D" label="Admin" if="${sessionScope.userData.role.value==ADMIN}"/>
+						</tabs>
+						<tabpanels>
+							<tabpanel if="${sessionScope.userData.role.value==ADMIN || RM3_PRODUCT}" vflex="1" hflex="1" >
+								<include src="/application/products/rm3.zul" />
+							</tabpanel>							
+							<tabpanel style="overflow:auto;" if="${sessionScope.userData.role.value==ADMIN || EPVC_PRODUCT}">
+								<include src="/application/products/epvc.zul" />
+							</tabpanel>
+							<tabpanel vflex="1" hflex="1" if="${sessionScope.userData.role.value==ADMIN}"
+								style="overflow:auto;">								
+								<include src="/application/admin/administrator.zul" />
+							</tabpanel>
+						</tabpanels>
+					</tabbox>
+				</hbox>
+			</vbox>
+
+		</north>
+	</borderlayout>
+</zk>

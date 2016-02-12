@@ -1,0 +1,11 @@
+<?meta http-equiv="X-UA-Compatible" content="chrome=1" ?>
+<?link rel="stylesheet" type="text/css" href="/style.css"?>
+<!-- protect page by the authentication init  -->
+<?init class="com.hrr3.controller.AuthenticationInit"?>
+<!-- authentication init have to locate before composition -->
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/application/layout/template-session.zul"?>
+
+<zk>
+	
+	<include id="mainInclude" self="@define(content)" src="/application/main/home.zul"/>
+</zk>

@@ -1,0 +1,11 @@
+<zk>
+	
+	<vbox id="rm3Window" if="${sessionScope.userData != null}" hflex="1" vflex="1">
+		
+		<hbox self="@insert(rm3Header)"/>
+		<hbox self="@insert(rm3Content)"></hbox>	
+		
+	</vbox>	
+        
+
+</zk>

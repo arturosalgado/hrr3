@@ -1,0 +1,66 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+
+	<div apply="org.zkoss.bind.BindComposer, com.hrr3.controller.SSRMigrationHotelListController" 
+	viewModel="@id('vm') @init('com.hrr3.modelview.FilterViewModel')">
+	
+	<listbox id="migrationHotelList" model="@load(vm.hotelModel)">
+		
+
+		<listhead>
+			<listheader hflex="2">Hotel Id</listheader>
+			<listheader hflex="2">Hotel Brand</listheader>			
+			<listheader hflex="2">Hotel Name</listheader>
+			<listheader hflex="2">State</listheader>
+			<listheader hflex="2">City</listheader>
+		</listhead>
+		
+				<auxhead>			
+			<auxheader colspan="1">
+				<image src="/widgets/grid/data_filter/img/funnel.png" />
+				<textbox instant="true" width="150px"  
+					value="@bind(vm.hotelFilter.hotelId)" onChange="@command('changeFilter')" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/widgets/grid/data_filter/img/funnel.png" />
+				<textbox instant="true" width="150px"  
+					value="@bind(vm.hotelFilter.brand)" onChange="@command('changeFilter')" />
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/widgets/grid/data_filter/img/funnel.png" />
+				<textbox instant="true"  width="150px"
+					value="@bind(vm.hotelFilter.name)" onChange="@command('changeFilter')"/>
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/widgets/grid/data_filter/img/funnel.png" />
+				<textbox instant="true"  width="150px"
+					value="@bind(vm.hotelFilter.state)" onChange="@command('changeFilter')"/>
+			</auxheader>
+			<auxheader colspan="1">
+				<image src="/widgets/grid/data_filter/img/funnel.png" />
+				<textbox instant="true" width="150px" 
+					value="@bind(vm.hotelFilter.city)" onChange="@command('changeFilter')"/>
+			</auxheader>
+			
+		</auxhead>
+		
+		<template name="model">
+			<listitem>
+				<listcell label="@load(each.hotelId)" />
+				<listcell label="@load(each.brand)" />				
+				<listcell label="@load(each.name)" />
+				<listcell label="@load(each.state)" />
+				<listcell label="@load(each.city)" />
+			</listitem>
+		</template>
+		<!-- <foot>
+			<footer span="4" class="footer_right" label="@load(vm.footer)" /> 
+		</foot> -->
+	</listbox>
+</div>
+
+
+
+
+
+</zk>

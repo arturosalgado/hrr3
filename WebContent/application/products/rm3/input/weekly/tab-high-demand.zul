@@ -1,0 +1,69 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox id="highDemandTabContainer" hflex="1" vflex="1" apply="com.hrr3.controller.WeeklyHighDemandTabController"> 
+		<groupbox hflex="1" vflex="1">
+			<caption>
+				<div>
+					<label>High demand Dates:</label>
+				</div>
+			</caption>
+				
+			<vbox align="top" hflex="1" vflex="1">
+				<separator height="5px"></separator>	
+				<label hflex="1">
+			 		 Identify days where a sell-out is likely and discuss your strategy to maximize RevPAR. Include a shoulder date occupancy
+			 		 or average rate/mix improvement goal for each opportunity (Why are you restricting?). Highlight changes only for previously
+			 		 identified dates.
+				</label>
+				<separator height="5px"></separator>				
+				<grid id="highDemandGrid" hflex="1" vflex="1" model="${highDemandTabContainer$composer.hdModel}" >
+				<columns>
+					<column hflex="1">Peak Date(s)</column>
+					<column hflex="2">Selling Restrictions</column>
+					<column hflex="3">Desire Outcome</column>
+				</columns>
+					<template name="model">
+							<row>								
+								<textbox height="50px" hflex="1" multiline="true" inplace="true" value="${each.peakdate}">
+									<custom-attributes currentObj="${each}"/>										
+									<attribute name="onChange">
+	                        				<![CDATA[    
+	                        				    String peakdate =this.self.getText();
+												com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgHD hdObj = (com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgHD) this.self.getAttribute("currentObj"); 
+												hdObj.setPeakdate(peakdate);
+												Events.sendEvent(Events.ON_CLICK, updateHdRow, hdObj);	
+											]]>
+	                        		</attribute>
+								</textbox>	
+								<textbox height="50px" hflex="1" multiline="true" inplace="true" value="${each.sellingRest}">
+									<custom-attributes currentObj="${each}"/>										
+									<attribute name="onChange">
+	                        				<![CDATA[    
+	                        				    String sellingRest =this.self.getText();
+												com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgHD hdObj = (com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgHD) this.self.getAttribute("currentObj"); 
+												hdObj.setSellingRest(sellingRest);
+												Events.sendEvent(Events.ON_CLICK, updateHdRow, hdObj);	
+											]]>
+	                        		</attribute>
+								</textbox>	
+								<textbox height="50px" hflex="1" multiline="true" inplace="true" value="${each.outcome}">
+								<custom-attributes currentObj="${each}"/>										
+									<attribute name="onChange">
+	                        				<![CDATA[    
+	                        				    String outcome =this.self.getText();
+												com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgHD hdObj = (com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgHD) this.self.getAttribute("currentObj"); 
+												hdObj.setOutcome(outcome);
+												Events.sendEvent(Events.ON_CLICK, updateHdRow, hdObj);	
+											]]>
+	                        		</attribute>
+								</textbox>	
+							</row>
+					</template>
+				</grid>
+				<button id="updateHdRow" visible="false"></button>
+			</vbox>
+		</groupbox>
+		
+		
+	</vbox>
+</zk>

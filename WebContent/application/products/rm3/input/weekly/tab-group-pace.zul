@@ -1,0 +1,59 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox id="groupPaceTabContainer" hflex="1" vflex="1" apply="com.hrr3.controller.WeeklyGroupPaceTabController">
+		<groupbox hflex="1" vflex="1">
+			<caption>
+				<div>
+					<label>Group Pace:</label>
+				</div>
+			</caption>
+				
+			<vbox align="top" hflex="1" vflex="1">
+				<separator height="5px"></separator>	
+				<hbox hflex="1" pack="end">
+			 		 Activity Date: <datebox id="activityDate" format="MM/dd/yyyy"/>
+				</hbox>
+				<separator height="5px"></separator>				
+				<grid id="groupPaceGrid" hflex="1" vflex="1" model="${groupPaceTabContainer$composer.groupPaceModel}" >
+				<columns>
+					<column width="120px">Type</column>
+					<column>Jan</column>
+					<column>Feb</column>
+					<column>Mar</column>
+					<column>Apr</column>
+					<column>May</column>
+					<column>Jun</column>
+					<column>Jul</column>
+					<column>Aug</column>
+					<column>Sep</column>
+					<column>Oct</column>
+					<column>Nov</column>
+					<column>Dec</column>
+					<column>Totals</column>
+				</columns>
+					<template name="model">
+							<row>					
+								<label value="${each.rowCaption}"/>		
+								<intbox readonly="${each.isReadOnly}" value="${each.janOcc}"/>								
+								<intbox readonly="${each.isReadOnly}" value="${each.febOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.marOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.aprOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.mayOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.junOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.julOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.augOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.sepOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.octOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.novOcc}"/>
+								<intbox readonly="${each.isReadOnly}" value="${each.decOcc}"/>
+								<intbox readonly="true" 			  value="${each.totOcc}"/>								
+							</row>
+					</template>
+				</grid>
+				<button id="updateGroupPaceRow" visible="false"></button>
+			</vbox>
+		</groupbox>
+		
+		
+	</vbox>
+</zk>

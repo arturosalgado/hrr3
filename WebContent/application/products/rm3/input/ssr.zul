@@ -1,0 +1,58 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+	<style>
+		tr.z-row td.z-row-inner, tr.z-row td.z-cell, tr.z-group td.z-group-inner, tr.z-groupfoot td.z-groupfoot-inner {
+		padding: 0px 0px 0px 0px;
+		}
+		.z-textbox, .z-decimalbox, .z-intbox, .z-longbox, .z-doublebox, .z-auxheader-cnt, div.z-column-cnt, div.z-row-cnt, .z-label {
+		font-size: 11px;
+		}
+	</style>
+
+	<window id="parentSSRInput" position="center,center" border="normal" maximizable="true" sizable="true"
+			 closable="true" title="SSR Input Screen" apply="com.hrr3.controller.SSRInputGridController"
+			action="show:slideDown; hide:slideUp" >
+
+	<vbox  
+		hflex="1" vflex="1">
+
+		<hbox hflex="1" height="70px" pack="center" align="center" style="border: 1px solid #c5c5c5;">
+			<hbox hflex="1">					
+				<hbox pack="center" align="center" hflex="1">
+					Start Date : <datebox id="ssrDateFrom" width="100px" format="MM/dd/yyyy" constraint="no empty"/>
+					End Date: <datebox id="ssrDateTo" width="100px" format="MM/dd/yyyy" constraint="no empty"/>
+					<button id="ssrSubmit" label="GO" width="40px" height="40px" />
+				</hbox>
+			</hbox>
+		</hbox>
+
+		<hbox hflex="1" vflex="1" >
+
+			<grid id="genericGrid" ctrlKeys="#left#right#up#down" hflex="1" vflex="1" height="${sessionScope.userData.screenPreferences.height}px" >
+							
+							
+				<auxhead id="segmentHeaders">	
+					<auxheader label="Total / Segments Header" />		        
+			    </auxhead>
+			    
+			    <frozen style="background: #DFDED8" columns="18">
+                	<div style="padding: 0 10px;" />
+            	</frozen>
+			    
+			    <columns>
+			    	<column>Totals/Segments</column>
+			    </columns>
+			    
+			    <rows>			    	
+			    </rows> 
+				
+
+			</grid>
+
+		</hbox>
+
+	</vbox>
+	
+	</window>
+
+</zk>

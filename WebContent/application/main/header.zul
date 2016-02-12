@@ -1,0 +1,68 @@
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" ?>
+
+
+<zk>
+	
+	<borderlayout id="headerContainer" apply="com.hrr3.controller.HeaderController">
+		<west hflex="1" vflex="1" border="none">
+			<vbox width="170px" vflex="3" pack="center" align="left">
+				<image id="headerLogo"
+					src="/images/companies/${sessionScope.userData.currentCustomer.logo}"
+					height="80px" width="80px" />
+				<separator />
+			</vbox>
+		</west>
+		<center border="none">
+			<hbox hflex="1" vflex="1" pack="center">
+				<!-- <label style="color:gray;font-size:12px;">Powered By:</label> -->
+				<image id="HRR3Logo" width="120px" height="50px"
+					src="/images/hrr3/logo.jpg"/>	
+					
+			</hbox>
+		</center>
+		<east border="none">
+			<vbox vflex="1" pack="top" align="right">
+				<hbox vflex="2">
+					<combobox id="customerListCombo" readonly="true"
+						model="@{headerContainer$HeaderController.customers}"
+						selectedItem="@{headerContainer$HeaderController.selectedCustomer}">
+						<comboitem self="@{each='customer'}"
+							label="@{customer.name}" value="@{customer.customerId}" />
+					</combobox>
+					<space bar="true" />
+					<combobox id="hotelListCombo" readonly="true"
+						model="@{headerContainer$HeaderController.hotels}"
+						selectedItem="@{headerContainer$HeaderController.selectedHotel}">
+						<comboitem self="@{each='hotel'}"
+							label="@{hotel.name}" value="@{hotel.hotelId}" />
+					</combobox>
+					<space bar="true" />					
+					<toolbarbutton label="Profile"
+						style="font-size:12px;" orient="horizontal"
+						onClick='((Window)Executions.createComponents("/application/profile/profile.zul", null, null)).doModal();' />
+					<space bar="true" />
+					<toolbarbutton label="Support"
+						style="font-size:12px;" orient="horizontal"
+						href="mailto:rm3-support@hotelrevenueresources.com" />
+					<space bar="true" />
+					<toolbarbutton id="logout" label="Logout"
+						apply="com.hrr3.controller.LogoutController"
+						style="font-size:12px;" orient="horizontal" />
+			</hbox>
+				<label vflex="1"
+					value="Welcome ${sessionScope.userData.fullName}"
+					style="color:gray;font-size:16px; font-weight:bold;" />
+					<label vflex="1" visible="false"
+					value="@{headerContainer$HeaderController.selectedCustomer.name}"
+					style="color:gray;font-size:12px; text-decoration:underline;" />
+					<label vflex="1" id="selectedHotelLabel" visible="false"
+					value="@{headerContainer$HeaderController.selectedHotel.name}"
+					style="color:gray;font-size:12px;  text-decoration:underline;" />			
+			</vbox>
+
+		</east>
+	</borderlayout>
+	
+	
+	
+</zk>

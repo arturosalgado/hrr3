@@ -1,0 +1,139 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+	<zscript>
+			  import java.text.SimpleDateFormat;
+			  import java.util.Date;
+			  import java.util.Calendar;
+	  
+	  		 	Date baseDate = new Date();
+	  		 	Date startDate = new Date();
+	  		 	Date endDate = new Date();
+	  		 	
+				Calendar calendar = Calendar.getInstance();
+				calendar.setTime(baseDate);
+				
+				calendar.add(Calendar.YEAR, 0);
+				calendar.set(Calendar.DAY_OF_YEAR, 1);
+				startDate = calendar.getTime();
+				
+				calendar.add(Calendar.YEAR, 1);
+				calendar.set(Calendar.DAY_OF_YEAR, 0);		
+				endDate = calendar.getTime();
+				
+				  		  
+  	</zscript>
+	<window position="center,center" border="normal" maximizable="true" sizable="true"
+			 closable="true" title="Group MAR Rate Set-up"
+			action="show:slideDown; hide:slideUp" >
+		
+	<vbox id="marBox" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('com.hrr3.modelview.GroupMARSetupViewModel')" hflex="1" vflex="1">
+		
+		<hbox hflex="1" height="70px" pack="center" align="center" style="border: 1px solid #c5c5c5;">
+			<vbox hflex="1" style="padding-left: 5px;">			
+				<vbox>
+					<hbox><label id="hotelNameLabel" value="@load(vm.currentHotel.name)"/></hbox>
+					<hbox>Total Rooms:<label id="totalRoomsLabel" value="@load(vm.currentHotel.totalRooms)"/></hbox>					
+				</vbox>
+			</vbox>		
+			<vbox hflex="1" align="center" pack="center">			
+				<hbox>
+					<datebox id="dateFrom" width="90px" format="MM/dd/yyyy" value="${startDate}" constraint="no empty"/>
+					<datebox id="dateTo" width="90px" format="MM/dd/yyyy" value="${endDate}" constraint="no empty"/>
+					<button id="lrrSubmit" onClick="@command('fillMARData')" label="GO"  />
+				</hbox>
+			</vbox>		
+				
+		</hbox>
+
+		<hbox hflex="1" vflex="1" onCreate="@command('fillMARInfo')" >
+			<groupbox hflex="1" style="padding: 5px;">
+						<caption>
+							<div>
+								<label>Minium realistic lead time to book by day of week (in days):</label>
+							</div>
+						</caption>
+						<vbox hflex="1">
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Sunday</label>
+								<intbox id="marInfoSun" hflex = "1" value="@load(vm.marInfo.sun)"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Monday</label>
+								<intbox id="marInfoMon" hflex = "1" value="@load(vm.marInfo.mon)"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Tuesday</label>
+								<intbox id="marInfoTue" hflex = "1" value="@load(vm.marInfo.tue)"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Wednesday</label>
+								<intbox id="marInfoWed" hflex = "1" value="@load(vm.marInfo.wed)"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Thrusday</label>
+								<intbox id="marInfoThu" hflex = "1" value="@load(vm.marInfo.thu)"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Friday</label>
+								<intbox id="marInfoFri" hflex = "1" value="@load(vm.marInfo.fri)"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Saturday</label>
+								<intbox id="marInfoSat" hflex = "1" value="@load(vm.marInfo.sat)"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Incremental CPOR $</label>
+								<decimalbox id="marInfoCpor" hflex="1" value="@load(vm.marInfo.cpor)" format="##0.00" locale="zh_TW"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<label hflex ="1">Occupancy Threshold for Distressed Rate%</label>
+								<decimalbox id="marInfoOcc" hflex="1" value="@load(vm.marInfo.occTfdr)" format="##0.0" locale="zh_TW"/>
+							</hbox>
+							<hbox hflex="1" style="padding: 5px;">
+								<button label="Save" onClick="@command('saveMARInfo')"/>
+							</hbox>
+						</vbox>
+						
+			</groupbox>		
+			<listbox id="genericListBox" ctrlKeys="#left#right#up#down" onCtrlKey="@command('doArrowManagement',e=event)" onAfterRender="@command('retrieveFellows')" hflex="5" vflex="1" height="${sessionScope.userData.screenPreferences.height}px" model="@load(vm.marListData)">
+				
+						<auxhead>									
+									<auxheader colspan="5" align="center"/>
+									<auxheader colspan="1" align="center"/>
+									<auxheader colspan="1" align="center"/>			
+						</auxhead>
+								
+						<listhead>
+							<listheader hflex="1">LeadTime</listheader>
+							<listheader hflex="1">DOW</listheader>
+							<listheader hflex="1">Arrival Date</listheader>
+							<listheader hflex="1">OCC Rooms</listheader>
+							<listheader hflex="1">OCC%</listheader>
+							<listheader hflex="1">Overwrite MAR Rate</listheader>
+							<listheader hflex="1">MAR Rate</listheader>
+						</listhead>
+						
+										
+						<template name="model" var="marrow">
+							<listitem>							
+								<listcell label="@bind(marrow.leadTime)" />
+								<listcell label="@bind(marrow.dow)" />
+								<listcell label="@bind(marrow.statdate)" />
+								<listcell label="@bind(marrow.ftTotOcc)" />
+								<listcell label="@bind(marrow.ftTotOccPcnt)" />
+								<listcell>
+									<decimalbox inplace="true" value="@bind(marrow.overrides)" format="###,##0.00" locale="zh_TW" onChange="@command('updateMARDataRow', selectedRow=marrow)"/>
+								</listcell>	
+								<listcell label="@bind(marrow.marrate)" />
+																
+							</listitem>
+						</template>					
+			</listbox>
+
+		</hbox>
+
+	</vbox>
+	
+</window>	
+
+</zk>

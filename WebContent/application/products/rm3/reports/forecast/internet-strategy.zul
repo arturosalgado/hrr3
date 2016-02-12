@@ -1,0 +1,130 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="popupDialog" width="450px" height="420px"
+		apply="com.hrr3.controller.reports.forecast.InternetStrategyController"
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal">
+		
+		<zscript>
+			  import java.text.SimpleDateFormat;
+			  import java.util.Date;
+			  import java.util.Calendar;
+	  
+	  		  Date currentDate = new Date();
+	  		  Date previousDate = new Date();
+	  		  
+	  		  Calendar c = Calendar.getInstance(); 
+			  c.setTime(previousDate); 
+			  c.add(Calendar.YEAR, -1);
+			  previousDate = c.getTime();
+  		  
+  		  </zscript>
+  		  
+  		  <zscript><![CDATA[
+        class UnrealizedTdFactor implements Constraint {
+            //Constraint//
+            public void validate(Component comp, Object value) {
+                if (value == null || ((java.math.BigDecimal)value).intValue() < -10 || ((java.math.BigDecimal)value).intValue() > 10){
+                	printReportBtn.setDisabled(true);
+                	throw new WrongValueException(comp, "Enter a valid range - (-10 to 10)");
+                }
+                
+                else {printReportBtn.setDisabled(false); }
+                    
+            }
+         
+		 }
+        
+        class SellOutTShold implements Constraint {
+            //Constraint//
+            public void validate(Component comp, Object value) {
+                if (value == null || ((Integer)value).intValue() < 0 || ((Integer)value).intValue() > 100){
+                	printReportBtn.setDisabled(true);
+                	throw new WrongValueException(comp, "Enter a valid range - (0 to 100)");
+                }
+                
+                else {printReportBtn.setDisabled(false); }
+                    
+            }
+         
+		 }
+        
+        Constraint tdFactorCT = new UnrealizedTdFactor();
+		Constraint sellOutCT = new SellOutTShold();
+		        
+		    ]]>
+		    </zscript>
+
+		<vbox vflex="1" hflex="1">
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Date Range</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">
+					
+					<hbox hflex="1" style="padding-top: 5px;">						
+						<label hflex="1">Start Date:</label><datebox id="dateFrom"
+						constraint="no empty" format="MM/dd/yyyy" value="${currentDate}"/>
+					</hbox>
+					<hbox hflex="1" style="padding-top: 5px;">	
+						<label hflex="1">End Date:</label><datebox id="dateTo"
+						constraint="no empty" format="MM/dd/yyyy" value="${currentDate}"/>
+					</hbox>
+				</vbox>
+			</groupbox>
+			
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Select Snapshots</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">						
+					
+					<hbox hflex="1" style="padding-top: 5px;">	
+						<label hflex="1">Forecast Snapshot:</label>					
+						<combobox id="snapshotsCombo" readonly="true" model="${popupDialog$composer.snapshotsModel}"	hflex="1">
+						<attribute name="onCreate">	if(self.getModel() != null ) self.setSelectedIndex(0);</attribute>	
+						<template name="model">
+							<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+							</comboitem>
+						</template>					
+						</combobox>
+					</hbox>
+					
+					<hbox hflex="1" style="padding-top: 5px;">	
+						<label hflex="1">SSR Snapshot:</label>					
+						<combobox id="ssrSnapshotsCombo" readonly="true" model="${popupDialog$composer.ssrSnapshotsModel}"	hflex="1">
+						<attribute name="onCreate">	if(self.getModel() != null ) self.setSelectedIndex(0);</attribute>	
+						<template name="model">
+							<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+							</comboitem>
+						</template>					
+						</combobox>
+					</hbox>
+					
+					<hbox hflex="1" style="padding-top: 5px;">						
+						<label hflex="1">Unrealized TD Factor:</label>
+						<decimalbox id="unrealizedTdFactor"	constraint="${tdFactorCT}"  format="#.#" locale="zh_TW"/>
+					</hbox>
+					<hbox hflex="1" style="padding-top: 5px;">	
+						<label hflex="1">Sell Out Threshold:</label>
+						<intbox id="sellOutThreshold" constraint="${sellOutCT}"/>
+					</hbox>
+					
+				</vbox>
+			</groupbox>
+			
+			<hbox style="padding: 2px;" hflex="1" pack="end">
+				<button id="printReportBtn" height="40px" width="80px"
+					autodisable="self" label="Print" />
+				<button id="exitReportBtn" height="40px"
+					autodisable="self" label="Exit" width="80px" />
+			</hbox>
+
+		</vbox>
+	</window>
+</zk>

@@ -1,0 +1,103 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+
+	<style>
+		tr.z-row td.z-row-inner, tr.z-row td.z-cell, tr.z-group td.z-group-inner, tr.z-groupfoot td.z-groupfoot-inner {
+		padding: 0px 0px 0px 0px;
+		}
+		.z-textbox, .z-decimalbox, .z-intbox, .z-longbox, .z-doublebox, .z-auxheader-cnt, div.z-column-cnt, div.z-row-cnt, .z-label {
+		font-size: 11px;
+		}
+	</style>
+
+	<window position="center,center" border="normal" width="100%" height="100%" contentStyle="overflow:auto;"
+			 title="Transient Input Screen"
+			action="show:slideDown; hide:slideUp">
+		
+	<vbox id="parentInputTransient" apply="com.hrr3.controller.InputTransientListController" 
+		hflex="1" vflex="1">
+
+		<hbox width="100%" height="70px" pack="left" align="center" style="border: 1px solid #c5c5c5;">
+			
+			<radiogroup id="transientTotalType">
+				<attribute name="onCreate">
+							self.setSelectedIndex(0);
+						</attribute>
+				<hbox>
+					<vbox width="150px">
+					<radio id="ra1" label="Total Hotel     " value="1"/>
+					<radio id="ra2" label="Total Paid Rooms" value="2"/>										
+					</vbox>
+					<vbox width="150px">
+						<radio id="ra4" label="Total Group     " value="3"/>
+						<radio id="ra6" label="Total Contract  " value="4"/>						
+					</vbox>		
+					<vbox width="150px">
+						<radio id="ra3" label="Total Transient " value="5"/>
+						<radio id="ra7" label="Total Misc      " value="6"/>							
+					</vbox>				
+				</hbox>
+				
+			</radiogroup>
+			
+			<vbox>
+				<hbox>
+					<combobox id="transientInputType" readonly="true" width="180px">
+						<attribute name="onCreate">
+							self.setSelectedIndex(0);
+						</attribute>						
+						<comboitem label="Transient" value="1"  />
+						<comboitem label="Contract" value="2" />
+						<comboitem label="MISC" value="3" />
+						<!-- <comboitem label="O/B"  value="4"/> -->
+					</combobox>
+				</hbox>
+				
+				<hbox>
+					<datebox id="transientDateFrom" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+					<datebox id="transientDateTo" width="90px" format="MM/dd/yyyy" constraint="no empty"/>
+				</hbox>
+			</vbox>
+
+			
+			<button id="transientSubmit" label="GO" width="40px" height="40px" />
+			<separator width="10px"></separator>
+			<button id="trendsSubmit" label="Trends" width="70px" height="40px" onClick='Executions.getCurrent().sendRedirect("/application/products/rm3/input/trend-tool.zul", "_blank");' />					
+			<separator width="10px"></separator>
+			<button id="printSubmit" label="Print" width="70px" height="40px" disabled="true" />
+		</hbox>
+
+		<hbox width="100%" height="100%">
+
+			<listbox id="genericListBox" ctrlKeys="#left#right#up#down"  hflex="1" rows="30">
+							
+				
+				<auxhead id="segmentHeaders">	
+					<auxheader label="Total / Segments Header" />		        
+			    </auxhead>
+			    <listhead id="listHeaders">	
+					<listheader label="Total / Segments Header" />		        
+			    </listhead>
+			    <!-- 
+			    <frozen style="background: #DFDED8" columns="10">
+                	<div style="padding: 0 10px;" />
+            	</frozen> -->
+			    <!-- 
+			    <columns>
+			    	<column>Totals/Segments</column>
+			    </columns>
+			    
+			    <rows>	
+			    		    	
+			    </rows> 
+				  -->
+
+			</listbox>
+
+		</hbox>
+
+	</vbox>
+	
+</window>	
+
+</zk>

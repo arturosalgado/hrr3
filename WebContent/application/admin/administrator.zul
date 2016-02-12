@@ -1,0 +1,126 @@
+<zk>
+<hbox width="100%">
+
+									<groupbox vflex="1">
+										<caption>
+											<div>
+												<label>
+													System Management
+												</label>
+											</div>
+										</caption>
+										<hbox align="top" vflex="1"
+											apply="com.hrr3.controller.AdminContainerController">
+											<toolbarbutton
+												id="productsBtn" image="/images/system/products.png"
+												label="Products" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical" />
+											<toolbarbutton
+												id="titlesBtn" image="/images/system/titles.png"
+												label="Titles" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical" />
+											<toolbarbutton
+												id="statesBtn" image="/images/system/states.png"
+												label="States" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical" />
+											<toolbarbutton
+												id="countriesBtn" image="/images/system/countries.png"
+												label="Countries" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical" />
+											<toolbarbutton
+												id="brandsBtn" image="/images/system/brands.png"
+												label="Hotel Brands"
+												style="text-align:center; font-size:11px;" width="65px"
+												orient="vertical" />
+											<toolbarbutton
+												id="statusBtn" image="/images/system/statuses.png"
+												label="Hotel Status"
+												style="text-align:center; font-size:11px;" width="65px"
+												orient="vertical" />
+										</hbox>
+									</groupbox>
+
+									<groupbox vflex="1">
+										<caption>
+											<div>
+												<label>
+													HRR Management
+												</label>
+											</div>
+										</caption>
+										<hbox align="top" vflex="1">
+											<toolbarbutton
+												id="customersBtn" image="/images/system/customers.png"
+												label="Customers" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical"/>
+											<toolbarbutton
+												id="hotelsBtn" image="/images/system/hotels.png" label="Hotels"
+												style="text-align:center; font-size:11px;" width="65px"
+												orient="vertical" />
+
+										</hbox>
+									</groupbox>
+
+									<groupbox vflex="1" hflex="1">
+										<caption>
+											<div>
+												<label>
+													RM3 Management
+												</label>
+											</div>
+										</caption>
+										<hbox align="top" vflex="1">
+											<toolbarbutton
+												id="accountsBtn" image="/images/mgmt/rm3accounts.png"
+												label="Accounts" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical" />
+											<toolbarbutton
+												id="marketSegmentsBtn" image="/images/mgmt/marketsegments.png"
+												label="Market Segments"
+												style="text-align:center; font-size:11px;" width="65px"
+												orient="vertical" />
+											<toolbarbutton
+												id="usersBtn" image="/images/mgmt/users.png"
+												label="User"
+												style="text-align:center; font-size:11px;" width="65px"
+												orient="vertical" />										
+											<toolbarbutton
+												id="snapshotMigrationBtn" image="/images/mgmt/snapshot_migration.png"
+												label="Snapshot Migration"
+												style="text-align:center; font-size:11px;" width="65px"
+												onClick='iframeAdminContent.setSrc("/application/admin/migration/migration.zul"); iframeAdminContent.setVisible(true);'
+												orient="vertical" />
+											<toolbarbutton
+												id="ssrSnapshotMigrationBtn" image="/images/mgmt/snapshot_migration.png"
+												label="SSR Migration"
+												style="text-align:center; font-size:11px;" width="65px"
+												onClick='iframeAdminContent.setSrc("/application/admin/ssr-migration/ssr-migration.zul"); iframeAdminContent.setVisible(true);'
+												orient="vertical" />			
+											<toolbarbutton
+												id="rm3ConfigurationBtn"
+												image="/images/mgmt/config.png"
+												label="Configuration" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical" />
+											<toolbarbutton
+												id="rm3RegionsBtn"
+												image="/images/mgmt/regions.png"
+												label="Regions" style="text-align:center; font-size:11px;"
+												width="65px" orient="vertical"
+												onClick='alert("Change Screen")' />
+										</hbox>
+									</groupbox>
+
+								</hbox>
+
+								<!-- Administration Content -->
+								<hbox width="100%" vflex="1"
+									align="center" pack="center">
+									<iframe id="iframeAdminContent"
+										visible="false"
+										style="border: 1px solid #c5c5c5; margin-top:5px; padding-top:20px;"
+										vflex="1" hflex="1" />
+										
+										
+			 
+								</hbox>
+</zk>

@@ -1,0 +1,11 @@
+<?page title="RM3 System" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/application/layout/template-rm3.zul"?>
+<zk>
+
+	<vbox self="@{define(rm3Content)}">
+		<label>Click on the menu options and then choose an item in the popup menu.</label>		
+	</vbox>
+		
+	<label self="@{define(rm3Header)}">Readme</label>
+
+</zk>

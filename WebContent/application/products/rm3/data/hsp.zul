@@ -1,0 +1,7 @@
+<?page title="RM3 System" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/application/layout/template-rm3.zul"?>
+<zk>
+
+		<include src="/application/products/rm3/data/components/hsp-form.zul" self="@{define(rm3Content)}" />	
+		<label self="@{define(rm3Header)}">Import Group on the Books</label>
+</zk>

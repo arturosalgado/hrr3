@@ -1,0 +1,25 @@
+<?page title="HRR3 System" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox align="center" pack="center" hflex="1" vflex="1">
+		<hbox hflex="1" vflex="1">
+			<!-- Empty space at the top -->
+		</hbox>
+		<hbox hflex="1" vflex="48">
+			<separator hflex="1" vflex="1" />
+			<borderlayout hflex="48" vflex="1">
+				<north size="90px" border="none">
+					<!-- HEADER -->
+					<include src="/application/main/header.zul" />
+				</north>
+				<center border="none" hflex="1" vflex="1">
+					<!-- TAB CONTENTS -->
+					<include src="/application/main/content.zul" />
+				</center>
+			</borderlayout>
+			<separator hflex="1" vflex="1" />
+		</hbox>
+
+		<hbox hflex="1" vflex="1"><!-- Empty space at the bottom --></hbox>
+
+	</vbox>
+</zk>

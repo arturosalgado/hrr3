@@ -1,0 +1,137 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+
+	<hbox id="parentSnapshots"
+		apply="com.hrr3.controller.SnapshotController" hflex="1" vflex="1">
+
+		<borderlayout vflex="1" hflex="1">
+			<center vflex="1" hflex="1" border="none">
+				<listbox id="snapshotListBox" hflex="1" vflex="1"
+					model="${parentSnapshots$composer.snapshotsModel}">
+					<listhead>
+						<listheader label="List of Snapshots" />
+					</listhead>
+
+					<template name="model">
+						<listitem>
+							<listcell label="${each.nameToDisplay}" value="${each.snapshotId}" />
+						</listitem>
+					</template>
+
+				</listbox>
+			</center>
+		</borderlayout>
+
+		<!--  <separator></separator> -->
+
+		<grid id="snapshotFormContainer" vflex="1" hflex="2">
+
+			<columns>
+				<column align="right" />
+				<column />
+			</columns>
+			<rows id="loginRows">
+
+				<row>
+					Name:
+					<textbox id="snapshotName" width="180px" />
+				</row>
+
+				<row>
+					Month:
+					<combobox id="snapshotMonth" readonly="true"
+						width="100px">
+						<attribute name="onCreate">
+	self.setSelectedIndex(0);
+</attribute>
+						<comboitem label="-- Month --" value="0" />
+						<comboitem label="January" value="1" />
+						<comboitem label="February" value="2" />
+						<comboitem label="March" value="3" />
+						<comboitem label="April" value="4" />
+						<comboitem label="May" value="5" />
+						<comboitem label="June" value="6" />
+						<comboitem label="July" value="7" />
+						<comboitem label="August" value="8" />
+						<comboitem label="September" value="9" />
+						<comboitem label="October" value="10" />
+						<comboitem label="November" value="11" />
+						<comboitem label="December" value="12" />
+					</combobox>
+				</row>
+
+				<row>
+					<label></label>
+					<checkbox id="snapshotFutureOnly" 
+						label="90 Days" />
+				</row>
+
+				<row>
+					<label id="snapshotYearLabel">Year:</label>
+					<intbox id="snapshotYear" width="70px"  visible="true"/>
+				</row>
+
+				<row>
+					<vbox>
+						<checkbox id="snapshotCF" onCheck="snapshotBU.setChecked(false); snapshotFutureOnly.setChecked(false)"
+							label="Current Forecast" />
+						<checkbox id="snapshotUF" onCheck="snapshotBU.setChecked(false); snapshotFutureOnly.setChecked(false)"
+							label="Updated Forecast" />
+					</vbox>
+					<vbox>
+						<checkbox id="snapshotQF" onCheck="snapshotBU.setChecked(false); snapshotFutureOnly.setChecked(false)"
+							label="Quarterly Forecast" />
+						<checkbox id="snapshotBU" label="Budget " onCheck="snapshotCF.setChecked(false); snapshotUF.setChecked(false); snapshotQF.setChecked(false); snapshotFutureOnly.setChecked(false);" />
+					</vbox>
+
+				</row>
+
+				<row>
+					<cell colspan="2" align="center">
+						<label>Restore Dates (MM/DD/YYYY)</label>
+					</cell>
+
+				</row>
+
+				<row>
+					<hbox>
+						From:
+						<datebox id="snapshotRestoreFrom" width="90px"
+							format="MM/dd/yyyy" />
+					</hbox>
+					<hbox>
+						To:
+						<datebox id="snapshotRestoreTo" width="90px"
+							format="MM/dd/yyyy" />
+					</hbox>
+				</row>
+
+				<row>
+					<cell colspan="2" align="center">
+						<hbox>
+							<button id="deleteSnapshotButton"
+								label="Delete" height="40px" disabled="true" />
+							<button id="restoreSnapshotButton"
+								label="Restore" height="40px" disabled="true" />
+							<button id="takeSnapshotButton"
+								label="Take Snapshot" height="40px" disabled="true" />
+							<button id="editNameSnapshotButton"
+								label="Edit Name" height="40px" disabled="true" />
+							<button id="saveAsUFSnapshotButton"
+								label="Save as UF" height="40px" disabled="true" />		
+						</hbox>
+
+					</cell>
+				</row>
+
+			</rows>
+		</grid>
+
+
+	</hbox>
+
+
+
+
+
+</zk>

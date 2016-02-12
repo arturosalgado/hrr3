@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.hotelSystemsPro.com/" xmlns:s1="http://htng.org/2010B" xmlns:s2="http://www.opentravel.org/OTA/2003/05" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://www.hotelSystemsPro.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">hotel SystemPro Open Web Services</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.hotelSystemsPro.com/">
+      <s:import namespace="http://htng.org/2010B" />
+      <s:element name="RequestAccessToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="client_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="client_secret" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RequestAccessTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RequestAccessTokenResult" type="tns:AccessTokenResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AccessTokenResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HSP_AccessTokenResponse">
+            <s:complexType>
+              <s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="ResponseType" type="tns:HSP_AccessTokenResponseType" />
+              </s:sequence>
+              <s:attribute name="ErrorResponse" type="s:string" />
+              <s:attribute name="TokenExpiration" type="s:dateTime" use="required" />
+              <s:attribute name="AccessToken" type="s:string" />
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="HSP_AccessTokenResponseType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Token" />
+          <s:enumeration value="Error" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="ExecuteQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:ExecuteQueryRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ExecuteQueryRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HTNG_StatisticsRQ" type="s1:HTNG_StatisticsRQ" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ExecuteQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteQueryResult" type="tns:ExecuteQueryResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ExecuteQueryResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="HTNG_StatisticsRS" type="s1:HTNG_StatisticsRS" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://htng.org/2010B">
+      <s:import namespace="http://www.opentravel.org/OTA/2003/05" />
+      <s:complexType name="HTNG_StatisticsRQ">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RequestorID" type="s2:UniqueID_Type" />
+          <s:element minOccurs="0" maxOccurs="1" name="Queries" type="s1:ArrayOfHTNG_StatisticsRQQuery" />
+        </s:sequence>
+        <s:attribute name="TransactionStatusCode" type="s2:HTNG_StatisticsRQTransactionStatusCode" />
+        <s:attribute name="SequenceNmbr" type="s:nonNegativeInteger" />
+        <s:attribute name="CorrelationID" type="s:string" />
+        <s:attribute name="RetransmissionIndicator" type="s:boolean" />
+        <s:attribute name="TransactionIdentifier" type="s:string" />
+        <s:attribute name="TimeStamp" type="s:dateTime" />
+        <s:attribute name="EchoToken" type="s:string" />
+        <s:attribute name="Version" type="s:decimal" use="required" />
+        <s:attribute name="Target" type="s2:HTNG_StatisticsRQTarget" />
+      </s:complexType>
+      <s:complexType name="ArrayOfHTNG_StatisticsRQQuery">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Query">
+            <s:complexType>
+              <s:sequence>
+                <s:element minOccurs="0" maxOccurs="1" name="RequestParameters" type="s1:ArrayOfHTNG_KeyValueItemsTypeKeyValueItem" />
+                <s:element minOccurs="0" maxOccurs="1" name="ResponseParameters">
+                  <s:complexType>
+                    <s:attribute default="XML" name="ResultFormat" type="s1:HTNG_ResultFormatType" />
+                    <s:attribute default="1" name="Size" type="s:integer" />
+                    <s:attribute default="All Ascending" name="UnitOfMeasure" type="s1:HTNG_QueryResultListType" />
+                  </s:complexType>
+                </s:element>
+              </s:sequence>
+              <s:attribute name="QueryTrackingID" type="s:string" />
+              <s:attribute name="StoredQueryName" type="s:string" />
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfHTNG_KeyValueItemsTypeKeyValueItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="KeyValueItem">
+            <s:complexType>
+              <s:attribute name="Key" type="s:string" />
+              <s:attribute default="Equals" name="Operator" type="s1:HTNG_ComparisonOperatorType" />
+              <s:attribute name="Value" type="s:string" />
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="HTNG_ComparisonOperatorType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Equals" />
+          <s:enumeration value="Does Not Equal" />
+          <s:enumeration value="Contains" />
+          <s:enumeration value="Does Not Contain" />
+          <s:enumeration value="Begins With" />
+          <s:enumeration value="Does Not Begin With" />
+          <s:enumeration value="Ends With" />
+          <s:enumeration value="Does Not End With" />
+          <s:enumeration value="Contains Data" />
+          <s:enumeration value="Does Not Contain Data" />
+          <s:enumeration value="Is Greater Than" />
+          <s:enumeration value="Is Greater Than or Equal To" />
+          <s:enumeration value="Is Less Than" />
+          <s:enumeration value="Is Less Than or Equal To" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="HTNG_ResultFormatType">
+        <s:restriction base="s:string">
+          <s:enumeration value="XML" />
+          <s:enumeration value="CSV" />
+          <s:enumeration value="PlainText" />
+          <s:enumeration value="Base64Binary" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="HTNG_QueryResultListType">
+        <s:restriction base="s:string">
+          <s:enumeration value="All Ascending" />
+          <s:enumeration value="All Descending" />
+          <s:enumeration value="Top Ascending" />
+          <s:enumeration value="Top Descending" />
+          <s:enumeration value="Bytes" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="HTNG_StatisticsRS">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RequestorID" type="s2:UniqueID_Type" />
+          <s:element minOccurs="0" maxOccurs="1" name="Queries" type="s1:ArrayOfHTNG_StatisticsRSQuery" />
+        </s:sequence>
+        <s:attribute name="TransactionStatusCode" type="s2:HTNG_StatisticsRQTransactionStatusCode" />
+        <s:attribute name="SequenceNmbr" type="s:nonNegativeInteger" />
+        <s:attribute name="CorrelationID" type="s:string" />
+        <s:attribute name="RetransmissionIndicator" type="s:boolean" />
+        <s:attribute name="TransactionIdentifier" type="s:string" />
+        <s:attribute name="TimeStamp" type="s:dateTime" />
+        <s:attribute name="EchoToken" type="s:string" />
+        <s:attribute name="Version" type="s:decimal" use="required" />
+        <s:attribute name="Target" type="s2:HTNG_StatisticsRQTarget" />
+      </s:complexType>
+      <s:complexType name="ArrayOfHTNG_StatisticsRSQuery">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Query">
+            <s:complexType>
+              <s:sequence>
+                <s:element minOccurs="0" maxOccurs="1" name="RequestParameters" type="s1:ArrayOfHTNG_KeyValueItemsTypeKeyValueItem" />
+                <s:element minOccurs="0" maxOccurs="1" name="ResponseParameters">
+                  <s:complexType>
+                    <s:attribute default="XML" name="ResultFormat" type="s1:HTNG_ResultFormatType" />
+                    <s:attribute default="1" name="Size" type="s:integer" />
+                    <s:attribute default="All Ascending" name="UnitOfMeasure" type="s1:HTNG_QueryResultListType" />
+                  </s:complexType>
+                </s:element>
+                <s:element minOccurs="0" maxOccurs="1" name="QueryResult" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="1" name="ExecutionTime" type="s:duration" />
+                <s:element minOccurs="0" maxOccurs="1" name="ExecutionNotes" type="s:string" />
+              </s:sequence>
+              <s:attribute name="ResultTrackingID" type="s:string" />
+              <s:attribute name="QueryTrackingID" type="s:string" />
+              <s:attribute name="StoredQueryName" type="s:string" />
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.opentravel.org/OTA/2003/05">
+      <s:complexType name="UniqueID_Type">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s2:CompanyNameType" />
+        </s:sequence>
+        <s:attribute name="Instance" type="s:string" />
+        <s:attribute name="ID_Context" type="s:string" />
+        <s:attribute name="URL" type="s:anyURI" />
+        <s:attribute name="Type" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CompanyNameType">
+        <s:simpleContent>
+          <s:extension base="s:string">
+            <s:attribute name="CompanyShortName" type="s:string" />
+            <s:attribute name="TravelSector" type="s:string" />
+            <s:attribute name="Code" type="s:string" />
+            <s:attribute name="CodeContext" type="s:string" />
+            <s:attribute name="Division" type="s:string" />
+            <s:attribute name="Department" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="OperatingAirlineType">
+        <s:simpleContent>
+          <s:extension base="s2:CompanyNameType">
+            <s:attribute name="FlightNumber" type="s:string" />
+            <s:attribute name="ResBookDesigCode" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="TravelArrangerType">
+        <s:simpleContent>
+          <s:extension base="s2:CompanyNameType">
+            <s:attribute name="DefaultInd" type="s:boolean" />
+            <s:attribute name="ShareSynchInd">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="Yes" />
+                  <s:enumeration value="No" />
+                  <s:enumeration value="Inherit" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+            <s:attribute name="ShareMarketInd">
+              <s:simpleType>
+                <s:restriction base="s:string">
+                  <s:enumeration value="Yes" />
+                  <s:enumeration value="No" />
+                  <s:enumeration value="Inherit" />
+                </s:restriction>
+              </s:simpleType>
+            </s:attribute>
+            <s:attribute name="TravelArrangerType" type="s:string" />
+            <s:attribute name="RPH" type="s:string" />
+            <s:attribute name="Remark" type="s:string" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:complexType name="CompanyNamePrefType">
+        <s:simpleContent>
+          <s:extension base="s2:CompanyNameType">
+            <s:attribute name="PreferLevel" type="s2:PreferLevelType" />
+          </s:extension>
+        </s:simpleContent>
+      </s:complexType>
+      <s:simpleType name="PreferLevelType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Only" />
+          <s:enumeration value="Unacceptable" />
+          <s:enumeration value="Preferred" />
+          <s:enumeration value="Required" />
+          <s:enumeration value="NoPreference" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ReservationID_Type">
+        <s:complexContent mixed="false">
+          <s:extension base="s2:UniqueID_Type">
+            <s:attribute name="StatusCode" type="s:string" />
+            <s:attribute name="LastModifyDateTime" type="s:dateTime" />
+            <s:attribute name="BookedDate" type="s:string" />
+            <s:attribute name="OfferDate" type="s:string" />
+            <s:attribute name="SyncDateTime" type="s:dateTime" />
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:simpleType name="HTNG_StatisticsRQTransactionStatusCode">
+        <s:restriction base="s:string">
+          <s:enumeration value="Start" />
+          <s:enumeration value="End" />
+          <s:enumeration value="Rollback" />
+          <s:enumeration value="InSeries" />
+          <s:enumeration value="Continuation" />
+          <s:enumeration value="Subsequent" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="HTNG_StatisticsRQTarget">
+        <s:restriction base="s:string">
+          <s:enumeration value="Test" />
+          <s:enumeration value="Production" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="RequestAccessTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:RequestAccessToken" />
+  </wsdl:message>
+  <wsdl:message name="RequestAccessTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:RequestAccessTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteQuery" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteQueryResponse" />
+  </wsdl:message>
+  <wsdl:portType name="hspOpenWebServicesSoap">
+    <wsdl:operation name="RequestAccessToken">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">hotel SystemsPro Request for Authorization</wsdl:documentation>
+      <wsdl:input message="tns:RequestAccessTokenSoapIn" />
+      <wsdl:output message="tns:RequestAccessTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">hotel SystemsPro HTNG Open Data eXchange Query Request</wsdl:documentation>
+      <wsdl:input message="tns:ExecuteQuerySoapIn" />
+      <wsdl:output message="tns:ExecuteQuerySoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="hspOpenWebServicesSoap" type="tns:hspOpenWebServicesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RequestAccessToken">
+      <soap:operation soapAction="http://www.hotelSystemsPro.com/RequestAccessToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <soap:operation soapAction="http://www.hotelSystemsPro.com/ExecuteQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="hspOpenWebServicesSoap12" type="tns:hspOpenWebServicesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RequestAccessToken">
+      <soap12:operation soapAction="http://www.hotelSystemsPro.com/RequestAccessToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteQuery">
+      <soap12:operation soapAction="http://www.hotelSystemsPro.com/ExecuteQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="hspOpenWebServices">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">hotel SystemPro Open Web Services</wsdl:documentation>
+    <wsdl:port name="hspOpenWebServicesSoap" binding="tns:hspOpenWebServicesSoap">
+      <soap:address location="http://209.162.190.128/hspOpenWebService/hspOpenWebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="hspOpenWebServicesSoap12" binding="tns:hspOpenWebServicesSoap12">
+      <soap12:address location="http://209.162.190.128/hspOpenWebService/hspOpenWebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

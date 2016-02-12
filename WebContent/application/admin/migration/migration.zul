@@ -1,0 +1,7 @@
+<?page title="RM3 System" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/application/layout/template-admin.zul"?>
+<zk>
+
+		<include src="/application/admin/migration/components/hotels-grid.zul" self="@{define(rm3Content)}" />	
+		<label self="@{define(rm3Header)}">Select the Hotel and the snapshot(s) to migrate.</label>
+</zk>

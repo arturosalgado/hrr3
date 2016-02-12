@@ -1,0 +1,57 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox id="softSpotTabContainer" hflex="1" vflex="1" apply="com.hrr3.controller.WeeklySoftSpotTabController"> 
+		<groupbox hflex="1" vflex="1">
+			<caption>
+				<div>
+					<label>Soft Spots:</label>
+				</div>
+			</caption>
+				
+			<vbox align="top" hflex="1" vflex="1">
+				<separator height="5px"></separator>	
+				<label hflex="1">
+			 		 Identify those dates where demand falls short of seasonal trend, like holidays and group "hotels". Identify strategies to address shortfall
+			 		 Highlight changes and results only for previously identified dates.
+				</label>
+				<separator height="5px"></separator>				
+				<grid id="softSpotGrid" hflex="1" vflex="1" model="${softSpotTabContainer$composer.ssModel}">
+				<columns>
+					<column hflex="1">Soft Spot</column>
+					<column hflex="2">Strategy</column>					
+				</columns>
+						
+						<template name="model">
+							<row>								
+								<textbox height="50px" hflex="1" multiline="true" inplace="true" value="${each.softspot}">
+									<custom-attributes currentObj="${each}"/>										
+									<attribute name="onChange">
+	                        				<![CDATA[    
+	                        				    String softspot =this.self.getText();
+												com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgSS hdObj = (com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgSS) this.self.getAttribute("currentObj"); 
+												hdObj.setSoftspot(softspot);
+												Events.sendEvent(Events.ON_CLICK, updateSsRow, hdObj);	
+											]]>
+	                        		</attribute>
+								</textbox>	
+								<textbox height="50px" hflex="1" multiline="true" inplace="true" value="${each.strategy}">
+									<custom-attributes currentObj="${each}"/>										
+									<attribute name="onChange">
+	                        				<![CDATA[    
+	                        				    String strategy =this.self.getText();
+												com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgSS hdObj = (com.hrr3.entity.ssrMigration.SSRSnapshotSUWklyMtgSS) this.self.getAttribute("currentObj"); 
+												hdObj.setStrategy(strategy);
+												Events.sendEvent(Events.ON_CLICK, updateSsRow, hdObj);	
+											]]>
+	                        		</attribute>
+								</textbox>								
+							</row>
+					</template>
+				</grid>
+				<button id="updateSsRow" visible="false"></button>
+			</vbox>
+		</groupbox>
+		
+		
+	</vbox>
+</zk>

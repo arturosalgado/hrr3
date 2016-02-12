@@ -1,0 +1,22 @@
+<zk>
+	<!-- create only when the user is loggedIn  
+	<borderlayout  if="${sessionScope.userData != null}" hflex="1" vflex="1" >
+	
+		<center border="none" hflex="1" vflex="1">
+			<vbox hflex="1" vflex="1">
+				<hbox self="@insert(rm3Header)"></hbox>
+				<separator />
+				<hbox self="@insert(rm3Content)" hflex="1" vflex="1"></hbox>				 
+			</vbox>
+		</center>
+	</borderlayout> -->
+	
+	<window id="rm3Window" if="${sessionScope.userData != null}" hflex="1" vflex="1" border="normal">
+		
+		<caption self="@insert(rm3Header)"/>
+		<hbox self="@insert(rm3Content)"></hbox>	
+		
+	</window>	
+        
+
+</zk>

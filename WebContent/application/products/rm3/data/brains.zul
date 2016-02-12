@@ -1,0 +1,16 @@
+<?page title="RM3 System" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/application/layout/template-rm3.zul"?>
+<zk>
+
+
+<zscript><![CDATA[
+                  
+                  String currentServerName = Sessions.getCurrent().getServerName();
+                  currentServerName = currentServerName.equals("localhost")?"http://dev2.valetsoftware.com":"http://" + currentServerName;
+                  
+                  ]]></zscript>
+	
+		<iframe self="@{define(rm3Content)}" style="padding:20px" src="${currentServerName}/hrr_yii_rm3_web/index.php/data/getBrainsMinimal?hotelId=${sessionScope.userData.currentHotel.hotelId}&amp;brainsHotelId=${sessionScope.userData.currentHotel.actualsVendorHotelId}&amp;userId=${sessionScope.userData.userId}" height="350px" width="1100px" />	
+		<label self="@{define(rm3Header)}">Import Actuals</label>
+
+</zk>

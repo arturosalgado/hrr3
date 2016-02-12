@@ -1,0 +1,115 @@
+<?taglib uri="http://www.zkoss.org/dsp/web/core" prefix="c" ?>
+<zk>
+
+	<hbox id="parentSnapshots"
+		apply="com.hrr3.controller.SSRSnapshotController" hflex="1" vflex="1">
+
+		<borderlayout vflex="1" hflex="1">
+			<center vflex="1" hflex="1" border="none">
+				<listbox id="snapshotListBox" hflex="1" vflex="1"
+					model="${parentSnapshots$composer.snapshotsModel}">
+					<listhead>
+						<listheader label="List of Snapshots" />
+					</listhead>
+
+					<template name="model">
+						<listitem>
+							<listcell label="${each.nameToDisplay}" value="${each.snapshotId}" />
+						</listitem>
+					</template>
+
+				</listbox>
+			</center>
+		</borderlayout>
+
+		<!--  <separator></separator> -->
+
+		<grid id="snapshotFormContainer" vflex="1" hflex="2">
+
+			<columns>
+				<column align="right" />
+				<column />
+			</columns>
+			<rows id="loginRows">
+
+				<row>
+					Name:
+					<textbox id="snapshotName" width="180px" />
+				</row>
+				
+				<row>
+					Date Created:
+					<textbox id="snapshotDateCreated" width="180px" disabled="true" />
+				</row>
+
+				<row>
+					Month:
+					<combobox id="snapshotMonth" readonly="true"
+						width="100px">
+						<attribute name="onCreate">
+	self.setSelectedIndex(0);
+</attribute>
+						<comboitem label="-- Month --" value="0" />
+						<comboitem label="January" value="1" />
+						<comboitem label="February" value="2" />
+						<comboitem label="March" value="3" />
+						<comboitem label="April" value="4" />
+						<comboitem label="May" value="5" />
+						<comboitem label="June" value="6" />
+						<comboitem label="July" value="7" />
+						<comboitem label="August" value="8" />
+						<comboitem label="September" value="9" />
+						<comboitem label="October" value="10" />
+						<comboitem label="November" value="11" />
+						<comboitem label="December" value="12" />
+					</combobox>
+				</row>
+
+				
+				<row>
+					<label id="snapshotYearLabel">Year:</label>
+					<intbox id="snapshotYear" width="70px"  visible="true"/>
+				</row>
+				
+				<row>
+					<label id="snapshotWeekNumberLabel">Week Number:</label>
+					<intbox id="snapshotWeekNumber" width="70px"  visible="true"/>
+				</row>
+
+				<row>
+					<label id="snapshotCurrentMeetingDateLabel">Current Meeting Date:</label>
+					<datebox id="snapshotCurrentMeetingDate" width="90px"
+							format="MM/dd/yyyy" />
+				</row>
+
+				<row>
+					<label id="snapshotLastDateActualsUsedLabel">Last Date of Actuals Used:</label>
+					<datebox id="snapshotLastDateActualsUsed" width="90px"
+							format="MM/dd/yyyy" />
+				</row>
+
+				<row>
+					<cell colspan="2" align="center">
+						<hbox>
+							<button id="deleteSnapshotButton"
+								label="Delete" height="40px" disabled="true" />
+							<button id="restoreSnapshotButton"
+								label="Restore" height="40px" disabled="true" />
+							<button id="takeSnapshotButton"
+								label="Take Snapshot" height="40px" disabled="true" />
+						</hbox>
+
+					</cell>
+				</row>
+
+			</rows>
+		</grid>
+
+
+	</hbox>
+
+
+
+
+
+</zk>

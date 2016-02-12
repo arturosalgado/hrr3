@@ -1,0 +1,40 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="modalSnapshotListDialog" width="900px" height="500px"
+apply="com.hrr3.controller.MigrationController"
+position="center,center" closable="true" action="show:slideDown; hide:slideUp" border="normal">
+	
+	<vbox pack="center" align="center">
+		<listbox id="snapshotToMigrateListBox" height="400px" checkmark="true"
+					model="${modalSnapshotListDialog$composer.snapshotsModel}">
+					<listhead>
+						<listheader width="32px" />	
+						<listheader label="Id" width="50px"/>
+						<listheader label="Name" width="400px" />	
+						<listheader label="Year" width="50px"/>
+						<listheader label="Month" width="50px" />
+						<listheader label="Is Migrated" width="100px"/>
+						<listheader label="Migration Date" />
+					</listhead>
+
+					<template name="model">
+						<listitem>
+							<listcell />
+							<listcell label="${each.snapshotId}" />
+							<listcell label="${each.nameToDisplay}" />
+							<listcell label="${each.year}" />
+							<listcell label="${each.month}" />
+							<listcell label="${each.isMigrated}" />
+							<listcell label="${each.migratedTS}" />
+						</listitem>
+					</template>
+
+				</listbox>
+				
+				<button id="migrateSnapthot" height="40px" autodisable="self"
+								label="Migrate Snapshot(s)" />	
+	</vbox>
+				
+			
+</window>
+</zk>

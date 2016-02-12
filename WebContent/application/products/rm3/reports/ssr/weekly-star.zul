@@ -1,0 +1,45 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="popupDialog" 
+		apply="com.hrr3.controller.reports.ssr.WeeklyStarController" 
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal">
+
+		<vbox vflex="1" hflex="1">
+
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Chart Option</label>
+					</div>
+				</caption>
+				<vbox hflex="1" style="padding: 10px;">
+					<checkbox id="addCharToReport" label="Add chart on the report" checked="true"></checkbox>
+				</vbox>
+				
+			</groupbox>
+			
+			<groupbox hflex="1" style="padding: 10px;">
+				<caption>
+					<div>
+						<label>Chart Scale</label>
+					</div>
+				</caption>	
+				<vbox hflex="1" style="padding: 10px;">
+					<hbox hflex="1"><label hflex="1">Maxium Axis Values:</label><intbox id="maxAxisValueBox" hflex="1" value="100" constraint="no empty"></intbox></hbox>
+					<hbox hflex="1"><label hflex="1">By manually scalling, some data may not show on the report.</label></hbox>
+				</vbox>					
+			</groupbox>
+
+			
+
+			<hbox style="padding: 2px;" hflex="1" pack="end">
+				<button id="printReportBtn" height="40px" width="80px"
+					autodisable="self" label="Print" />
+				<button id="exitReportBtn" height="40px"
+					autodisable="self" label="Exit" width="80px" />
+			</hbox>
+
+		</vbox>
+	</window>
+</zk>

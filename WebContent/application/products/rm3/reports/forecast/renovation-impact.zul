@@ -1,0 +1,169 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:h='http://www.w3.org/1999/xhtml'>
+	<window id="renovationDialog"
+		 maximizable="true" sizable="true"
+		position="center,center" closable="true" width="1000px" height="800px" apply="com.hrr3.controller.reports.forecast.RenovationImpactController"
+		action="show:slideDown; hide:slideUp" border="normal">
+		
+		<zscript>
+			  import java.text.SimpleDateFormat;
+			  import java.util.Date;
+			  import java.util.Calendar;
+	  
+	  		  Date currentDate = new Date();  		  
+  		  </zscript>
+  		  
+  		  <zscript><![CDATA[
+        class UnrealizedTdFactor implements Constraint {
+            //Constraint//
+            public void validate(Component comp, Object value) {
+                if (value == null || ((java.math.BigDecimal)value).intValue() < -10 || ((java.math.BigDecimal)value).intValue() > 10){
+                	printReportBtn.setDisabled(true);
+                	throw new WrongValueException(comp, "Enter a valid range - (-10 to 10)");
+                }
+                
+                else {printReportBtn.setDisabled(false); }
+                    
+            }
+         
+		 }
+        
+        class SellOutTShold implements Constraint {
+            //Constraint//
+            public void validate(Component comp, Object value) {
+                if (value == null || ((Integer)value).intValue() < 0 || ((Integer)value).intValue() > 100){
+                	printReportBtn.setDisabled(true);
+                	throw new WrongValueException(comp, "Enter a valid range - (0 to 100)");
+                }
+                
+                else {printReportBtn.setDisabled(false); }
+                    
+            }
+         
+		 }
+        
+        Constraint tdFactorCT = new UnrealizedTdFactor();
+		Constraint sellOutCT = new SellOutTShold();
+		        
+		    ]]>
+		    </zscript>
+
+		<vbox vflex="1" hflex="1">
+			<hbox hflex="1">
+				<vbox hflex="1">
+					<groupbox style="padding: 4px;" hflex="1">
+						<caption>
+							<div>
+								<label>Select Snapshots</label>
+							</div>
+						</caption>
+						<vbox style="padding: 2px;" hflex="1">	
+							<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Forecast Snapshot:</label>					
+										<combobox id="snapshotsCombo" readonly="true" model="${renovationDialog$composer.snapshotsModel}"	hflex="2">												
+											<template name="model">
+												<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+												</comboitem>
+											</template>					
+										</combobox>				
+							</hbox>
+							<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">SSR Snapshot:</label>					
+										<combobox id="ssrSnapshotsCombo" readonly="true" model="${renovationDialog$composer.ssrSnapshotsModel}"	hflex="2">												
+											<template name="model">
+												<comboitem label="${each.nameToDisplay}" value="${each.snapshotId}">								
+												</comboitem>
+											</template>					
+										</combobox>				
+							</hbox>
+							<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Dates From-To:</label>					
+										<datebox id="statDateFrom" hflex="1" format="MM/dd/yyyy" constraint="no empty" value="${currentDate}"/>	
+										<datebox id="statDateTo" hflex="1" format="MM/dd/yyyy" constraint="no empty" value="${currentDate}"/>				
+							</hbox>
+							<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Unrealized TD Factor:</label>
+										<decimalbox id="unrealizedTdFactor"	constraint="${tdFactorCT}"  format="#.#" locale="zh_TW"/>			
+							</hbox>
+							<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Sell Out Threshold:</label>
+										<intbox id="sellOutThreshold" constraint="${sellOutCT}"/>			
+							</hbox>
+							
+							<hbox style="padding: 2px;" hflex="1">	
+										<label hflex="1">Alternate Row Color:</label>					
+										<checkbox hflex="2"/>	 			
+							</hbox>
+						</vbox>
+					</groupbox>
+					
+				</vbox>
+				<vbox vflex="1" hflex="1">
+					<hbox hflex="1" style="padding: 4px;">						
+						<groupbox height="80px" hflex="1">
+							<caption>
+								<div>
+									<label>Total Rooms</label>
+								</div>
+							</caption>
+							<hbox style="padding: 2px;" hflex="1" vflex="1" pack="center" align="center">
+								<label id="totalRooms" style="font-size: 20px;"  value="34"/>						
+							</hbox>							
+						</groupbox>	
+					</hbox>	
+					<hbox hflex="1" vflex="1" style="padding: 4px;">
+						<groupbox vflex="1" hflex="1">
+								<caption>
+									<div>
+										<label>Options</label>
+									</div>
+								</caption>
+								<vbox hflex="1" vflex="1">									
+									<hbox style="padding: 2px;" hflex="1">	
+										<button id="saveSettingsBtn" label="Save Settings" hflex="1"  height="50px"></button>					
+										<button id="loadReportBtn" label="Load Report" hflex="1" height="50px"></button>
+										<button id="printReportBtn" label="Print Report" hflex="1" height="50px" disabled="true"></button>	
+										<button id="exitReportBtn" label="Exit" hflex="1" height="50px"></button>			
+									</hbox>
+								</vbox>
+								
+						</groupbox>	
+					</hbox>	
+					
+				</vbox>
+				
+			</hbox>
+			
+			<hbox vflex="1" hflex="1" style="padding: 4px;">			
+				<listbox id="genericListBox" ctrlKeys="#left#right#up#down" hflex="1" vflex="1" sizedByContent="true">
+					<auxhead id="renovationAuxHeaders">	
+						<auxheader label="General Information" colspan="7" align="center"/>	
+						<auxheader label="Renovation Impact" colspan="4" align="center"/>
+						<auxheader label="" colspan="3" align="center"/>	       
+			    	</auxhead>
+			    	<!-- <frozen style="background: #DFDED8" columns="6">
+                		<div style="padding: 0 10px;" />
+            		</frozen>  -->
+			    	<listhead>
+			    		<listheader width="80px">Comments</listheader>
+			    		<listheader width="80px">DOW</listheader>
+			    		<listheader width="80px">Date</listheader>
+			    		<listheader>A/F</listheader>
+			    		<listheader>Vacant <h:br /> Sellable</listheader>
+			    		<listheader>Occ% <h:br /> Avail-OOO</listheader>
+			    		<listheader>Occ% <h:br /> Ttl Avail</listheader>
+			    		<listheader>Occ <h:br /> Rooms</listheader>
+			    		<listheader width="60px">Ttl <h:br /> ADR</listheader>
+			    		<listheader width="90px" align="right">Ttl <h:br /> Revenue</listheader>
+			    		<listheader>Demand</listheader>
+			    		<listheader>O-O-O <h:br /> Rooms</listheader>
+			    		<listheader width="65px">Displaced <h:br /> Rooms</listheader>
+			    		<listheader width="65px">Displaced <h:br /> Revenue</listheader>
+			    	</listhead>
+			    	
+				</listbox>
+			</hbox>
+
+		</vbox>
+	</window>
+</zk>

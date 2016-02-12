@@ -1,0 +1,21 @@
+<zk>
+<zscript><![CDATA[
+                  
+com.hrr3.services.AuthenticationService authService = new com.hrr3.authentication.AuthenticationServiceHRR3Impl();
+
+String currentHostName = Sessions.getCurrent().getServerName().equals("localhost")?"http://dev2.valetsoftware.com":"http://" + Sessions.getCurrent().getServerName();                  
+                  
+                  ]]></zscript>
+
+	<window id="lrrForm" height="400px" width="1100px"  title="User Profile"
+		apply="org.zkoss.bind.BindComposer"
+		position="center,center" closable="true"
+		action="show:slideDown; hide:slideUp" border="normal">
+		
+		<iframe id="iframeProfileContent" src="${currentHostName}/HRR_admin_2013/profile_view.php?us=${authService.userData.userId}"		
+										visible="true"
+										style="border: 1px solid #c5c5c5; margin-top:5px; padding-top:20px;"
+										vflex="1" hflex="1" />
+	</window>
+
+</zk>
